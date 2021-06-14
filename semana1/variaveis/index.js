@@ -38,9 +38,8 @@ alert(`Voce recebe ${t/p} por hora`)
 //              let salarioDiario = prompt("Quanto você recebe por dia?")
 //              alert(`Voce recebe ${salarioDiario/horasTrabalhoDiario} por hora`)
  
+
 // --------------- EXERCÍCIOS DE ESCRITA DE CÓDIGO ---------------
-
-
 
 // 1.
 
@@ -77,3 +76,12 @@ b = c
 
 console.log("O novo valor de a é:", a)
 console.log("O novo valor de b é:", b)
+
+
+// --------------- DESAFIO DE ESCRITA DE CÓDIGO ---------------
+
+const numero1 = Number(prompt("Escolha um número qualquer"))
+const numero2 = Number(prompt("Escolha outro número qualquer"))
+
+console.log(numero1 + numero2)
+console.log(numero1 * numero2)
