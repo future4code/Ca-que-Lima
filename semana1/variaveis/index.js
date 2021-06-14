@@ -83,5 +83,5 @@ console.log("O novo valor de b é:", b)
 const numero1 = Number(prompt("Escolha um número qualquer"))
 const numero2 = Number(prompt("Escolha outro número qualquer"))
 
-console.log(numero1 + numero2)
-console.log(numero1 * numero2)
+console.log("O primeiro número somado ao segundo número resulta em:", numero1 + numero2)
+console.log("O primeiro número multiplicado pelo segundo número resulta em:", numero1 * numero2)
