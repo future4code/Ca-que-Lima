@@ -147,4 +147,4 @@ console.log(xicaras.toString(), "xic equivalem a:", litros, "L")
 
 feet = Number(prompt("A quantos mil pés você voou hoje?"))
 metros = feet / 3.281
-console.log(feet.toString(), "ft equivalem a:", metros, "m")
+console.log(feet + "ft equivalem a:", metros + "m")
