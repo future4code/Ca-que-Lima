@@ -60,7 +60,7 @@ ${comidasPreferidas[i+2]}
 ${comidasPreferidas[i+3]}
 ${comidasPreferidas[i+4]}`)
 
-c) Aqui vai um desafio: pergunte ao usuário uma comida preferida. Troque a segunda comida da sua lista pela inserida pelo usuário. Imprima na tela a nova lista 
+// c) Aqui vai um desafio: pergunte ao usuário uma comida preferida. Troque a segunda comida da sua lista pela inserida pelo usuário. Imprima na tela a nova lista 
 
 const comidaUsuario = prompt('Qual a sua comida preferida?')
 comidasPreferidas.splice(1, 4)
@@ -87,6 +87,10 @@ const tarefa3 = prompt('Digite uma terceira tarefa que você precisa fazer hoje'
 listaDeTarefas.push(tarefa1)
 listaDeTarefas.push(tarefa2)
 listaDeTarefas.push(tarefa3)
+
+ ----OU----
+
+listaDeTarefas.push(tarefa1, tarefa2, tarefa3)
 
 // c) Imprima o array na tela
 
