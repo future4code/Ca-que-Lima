@@ -88,7 +88,7 @@ listaDeTarefas.push(tarefa1)
 listaDeTarefas.push(tarefa2)
 listaDeTarefas.push(tarefa3)
 
-//  ----OU----
+//  ---- OU ----
 
 listaDeTarefas.push(tarefa1, tarefa2, tarefa3)
 
@@ -123,6 +123,10 @@ console.log(fraseEmArray)
 // 2. Dado o array ["Banana", "Morango", "Abacaxi", "Laranja", "Ameixa"], faça um programa que acha o índice da palavra Abacaxi e imprime tanto o índice quanto o tamanho do array
 
 const array = ['Banana', 'Morango', 'Abacaxi', 'Laranja', 'Ameixa']
+const indiceAbacaxi = array.indexOf('Abacaxi')
+
+// ---- OU ----
+
 const indiceAbacaxi = array.findIndex(buscaFruta)
 
 function buscaFruta(element, index, array){
