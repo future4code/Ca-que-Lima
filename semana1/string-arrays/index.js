@@ -88,7 +88,7 @@ listaDeTarefas.push(tarefa1)
 listaDeTarefas.push(tarefa2)
 listaDeTarefas.push(tarefa3)
 
- ----OU----
+//  ----OU----
 
 listaDeTarefas.push(tarefa1, tarefa2, tarefa3)
 
