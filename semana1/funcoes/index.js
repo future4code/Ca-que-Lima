@@ -59,6 +59,8 @@ imprimeFrase1()
 
 // b) Agora escreva uma função que receba 4 parâmetros que correspondem às informações de uma pessoa: o nome (string), a idade (number), a cidade (string) e uma profissão (string). Ela deve retornar uma string que unifique todas as informações da pessoa em uma só mensagem com o template:
 
+// Eu sou [NOME], tenho [IDADE] anos, moro em [ENDEREÇO] e sou [PROFISSÃO].
+
 const nome = prompt(`Qual o seu nome?`)
 const idade = Number(prompt(`Qual a sua idade?`))
 const cidade = prompt(`Em qual cidade você mora?`)
