@@ -111,13 +111,13 @@ function imprimeMaiusculoETamanho(mensagem){
 
 imprimeMaiusculoETamanho(mensagem)
 
-3. Crie uma função para cada uma das operações básicas (soma, subtração, multiplicação e divisão). Em seguida, peça para o usuário inserir dois números e chame essas 4 funções com esses valores imputados pelo usuário sendo o argumento. Por fim, mostre no console o resultado das operações:
+// 3. Crie uma função para cada uma das operações básicas (soma, subtração, multiplicação e divisão). Em seguida, peça para o usuário inserir dois números e chame essas 4 funções com esses valores imputados pelo usuário sendo o argumento. Por fim, mostre no console o resultado das operações:
 
-Números inseridos: 30 e 3
-Soma: 33
-Diferença: 27
-Multiplicação: 90
-Divisão: 10
+// Números inseridos: 30 e 3
+// Soma: 33
+// Diferença: 27
+// Multiplicação: 90
+// Divisão: 10
 
 let numeroUsuario1 = Number(prompt(`Digite um número`))
 let numeroUsuario2 = Number(prompt(`Digite um segundo número`))
@@ -161,3 +161,38 @@ console.log(`Soma: ${resultadoSoma}`)
 console.log(`Diferença: ${resultadoSubtracao}`)
 console.log(`Multiplicação: ${resultadoMultiplicacao}`)
 console.log(`Divisão: ${resultadoDivisao}`)
+
+
+
+// --------------- DESAFIOS DE ESCRITA DE CÓDIGO ---------------
+
+
+
+// 1.Funções são trechos de códigos como quaisquer outros mas que podemos acessá-los mais de uma vez ao longo do código através de invocações/chamadas. Então, funções podem chamar/invocar outras funções também. Sua tarefa é escrever duas funções
+
+// a) Escreva uma arrow function que recebe um parâmetro e imprime no console esse parâmetro
+
+const imprimeParametro = (parametro) => {
+    console.log(parametro)
+}
+
+// b) Escreva outra arrow function que recebe dois valores como parâmetros mas nenhum retorno. Faça a soma entre esses valores e chame a sua primeira função mandando este resultado da soma como entrada para imprimi-lo
+
+const soma2Parametros = (parametro1, parametro2) => {
+    let soma = parametro1 + parametro2
+    imprimeParametro(soma)
+}
+
+soma2Parametros(2, 5)
+
+// 2. Faça uma função que execute o teorema de Pitágoras, recebendo dois catetos e calculando o valor da hipotenusa. Retorne este valor, invoque a função e imprima o resultado no console. 
+
+function calculaHipotenusa(cateto1, cateto2){
+    let catetoQuadrado1 = cateto1 * cateto1
+    let catetoQuadrado2 = cateto2 * cateto2
+    let somaDosCatetos = catetoQuadrado1 + catetoQuadrado2
+    return Math.sqrt(somaDosCatetos)
+}
+
+let hipotenusa = calculaHipotenusa(2, 2)
+console.log(`A Hipotenusa é: ${hipotenusa}`)
