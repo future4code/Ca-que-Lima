@@ -66,12 +66,12 @@ const idade = Number(prompt(`Qual a sua idade?`))
 const cidade = prompt(`Em qual cidade você mora?`)
 const profissao = prompt(`Qual a sua profissão?`)
 
-function imprimeFrase2(nome, idade, cidade, profissão){
-    const frase2 = (`Eu sou ${nome}, tenho ${idade} anos, moro em ${cidade} e sou ${profissão}.`)
-    console.log(frase2)
+function criaFrase(nome, idade, cidade, profissão){
+    return (`Eu sou ${nome}, tenho ${idade} anos, moro em ${cidade} e sou ${profissão}.`)
 }
 
-imprimeFrase2(nome, idade, cidade, profissao)
+let fraseCriada = criaFrase(nome, idade, cidade, profissao)
+console.log(fraseCriada)
 
 // 2. Escreva as funções explicadas abaixo:
 
