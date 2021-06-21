@@ -140,6 +140,7 @@ function retornaArray(dados){
 console.log(retornaArray(dadosPessoa1))
 console.log(retornaArray(dadosPessoa2))
 
+
 // 3. Resolva os passos a seguir:
 
 // a) Crie uma variável de escopo global que guarde um `array` vazio chamada `carrinho`
@@ -165,3 +166,50 @@ encheCarrinho(fruta3)
 // d) Imprima a variável carrinho e garanta que ela agora seja um array preenchido com três objetos. 
 
 console.log(carrinho)
+
+
+
+// --------------- DESAFIOS DE ESCRITA DE CÓDIGO ---------------
+
+
+
+// 1. Crie um função que pergunte ao usuário seu nome, sua idade e sua profissão e depois imprima no console um objeto com essas propriedades. Depois de imprimir o novo objeto, imprima também o tipo dele para garantir que é um objeto.
+
+function perguntaUsuario(nome, idade, profissao){
+    nome = prompt(`Qual o seu nome?`)
+    idade = Number(prompt(`Qual a sua idade?`))
+    profissao = prompt(`Qual a sua profissão?`)
+    const dadosUsuario = {nome, idade, profissao}
+    console.log(dadosUsuario)
+    console.log(typeof dadosUsuario)
+}
+
+perguntaUsuario()
+
+
+// 2. Crie uma função que receba dois objetos que representam filmes. Eles devem ter as propriedades: ano de lançamento e nome. A função deve retornar uma mensagem no seguinte modelo:
+
+// O primeiro filme foi lançado antes do segundo? false
+// O primeiro filme foi lançado no mesmo ano do segundo? true
+
+const filme1 = {nome: "Interestelar", anoDeLancamento: 2014}
+const filme2 = {nome: "A origem", anoDeLancamento: 2010}
+
+function comparaFilmes(filme1, filme2){
+    const primeiraComparacao = filme1.anoDeLancamento < filme2.anoDeLancamento
+    const segundaComparacao = filme1.anoDeLancamento === filme2.anoDeLancamento
+    const resultado = `O primeiro filme foi lançado antes do segundo? ${primeiraComparacao}
+    O primeiro filme foi lançado no mesmo ano do segundo? ${segundaComparacao}`
+    return resultado
+}
+
+console.log(comparaFilmes(filme1, filme2))
+
+
+// 3. Crie uma função a mais pro exercício 3 de escrita de código. Essa função vai auxiliar o controle de estoque do sacolão: ela deve receber por parâmetro uma das frutas e retornar esse mesmo objeto com a propriedade disponibilidade com o valor invertido. 
+
+function controlaEstoque(fruta){
+    return {...fruta, disponibilidade: !fruta.disponibilidade}
+}
+
+console.log(controlaEstoque(fruta1))
