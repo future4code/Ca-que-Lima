@@ -114,25 +114,4 @@ function mostraResultado() {
    alert(`Suas cartas são: ${maoUsuario}. Sua pontuação é :${pontuacaoUsuario}. \nAs cartas do computador são: ${maoComputador}. A pontuação do computador é: ${pontuacaoComputador}. \n${resultado}`)
 }
 
-
 iniciaJogo()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
