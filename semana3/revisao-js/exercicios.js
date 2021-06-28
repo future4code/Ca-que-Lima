@@ -53,7 +53,13 @@ function retornaExpressoesBooleanas() {
 
 // EXERCÍCIO 07
 function retornaNNumerosPares(n) {
-
+  let arrayPares = [0]
+  let i = 1
+  while (i < n) {
+    arrayPares.push(arrayPares[arrayPares.length - 1] + 2)
+    i++
+  }
+  return arrayPares
 }
 
 // EXERCÍCIO 08
