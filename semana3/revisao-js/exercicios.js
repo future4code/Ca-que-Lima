@@ -194,7 +194,7 @@ function multiplicaArrayPor2(array) {
 
 // EXERCÍCIO 17B
 function multiplicaArrayPor2S(array) {
-
+  return array.map(numero => (numero * 2).toString())
 }
 
 // EXERCÍCIO 17C
