@@ -200,14 +200,13 @@ function multiplicaArrayPor2S(array) {
 // EXERCÍCIO 17C
 function verificaParidade(array) {
   let novoArray = new Array
-  let parOuImpar
   for (item of array) {
     if (item % 2 === 0) {
       parOuImpar = 'par'
-      novoArray.push(`${item} é ${parOuImpar}`)
+      novoArray.push(`${item} é par`)
     } else {
       parOuImpar = 'ímpar'
-      novoArray.push(`${item} é ${parOuImpar}`)
+      novoArray.push(`${item} é ímpar`)
     }} 
   return novoArray
 }
