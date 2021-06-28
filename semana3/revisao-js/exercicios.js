@@ -189,7 +189,7 @@ function menoresDe18(arrayDePessoas) {
 
 // EXERCÍCIO 17A
 function multiplicaArrayPor2(array) {
-
+  return array.map(numero => numero * 2)
 }
 
 // EXERCÍCIO 17B
