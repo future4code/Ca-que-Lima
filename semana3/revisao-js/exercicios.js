@@ -77,12 +77,27 @@ function checaTriangulo(a, b, c) {
 
 // EXERCÍCIO 09
 function comparaDoisNumeros(num1, num2) {
-  // Formato do objeto a ser retornado:
-  // {
-  //   maiorNumero: X,
-  //   maiorDivisivelPorMenor: Y,
-  //   diferenca: Z
-  // }
+  let numeroMaior
+  let divisivel
+  let diferenca
+  if (num1 > num2) {
+    numeroMaior = num1
+    divisivel = num1 % num2 === 0
+    diferenca = num1 - num2
+  } else if (num2 > num1) {
+    numeroMaior = num2
+    divisivel = num2 % num1 === 0
+    diferenca = num2 - num1
+  } else {
+    numeroMaior = num1
+    divisivel = true
+    diferenca = 0
+  }
+  return {
+    maiorNumero: numeroMaior,
+    maiorDivisivelPorMenor: divisivel,
+    diferenca: diferenca
+  }
 }
 
 // EXERCÍCIO 10
