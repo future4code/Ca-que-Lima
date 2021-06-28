@@ -20,7 +20,13 @@ function retornaNumerosParesElevadosADois(array) {
 
 // EXERCÍCIO 03
 function retornaNumerosPares(array) {
-
+  let arrayPar = new Array
+  for (numero of array) {
+    if (numero % 2 === 0) {
+      arrayPar.push(numero)
+    }
+  }
+  return arrayPar
 }
 
 // EXERCÍCIO 04
