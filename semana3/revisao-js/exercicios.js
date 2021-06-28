@@ -102,7 +102,14 @@ function comparaDoisNumeros(num1, num2) {
 
 // EXERCÍCIO 10
 function segundoMaiorEMenor(array) {
-
+  const arrayUnicos = [...new Set(array)]
+  const maiorNumero = Math.max(...arrayUnicos)
+  const menorNumero = Math.min(...arrayUnicos)
+  const arrayUnicosSemMaximo = arrayUnicos.filter(numero => numero < maiorNumero)
+  const arrayUnicosSemMinimo = arrayUnicos.filter(numero => numero > menorNumero)
+  const segundoMaior = Math.max(...arrayUnicosSemMaximo)
+  const segundoMenor = Math.min(...arrayUnicosSemMinimo)
+  return [segundoMaior, segundoMenor]
 }
 
 // EXERCÍCIO 11
