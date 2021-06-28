@@ -167,7 +167,13 @@ function anonimizaPessoa(pessoa) {
 
 // EXERCÍCIO 16A
 function maioresDe18(arrayDePessoas) {
-
+  let arrayMaiorde18 = new Array
+  for (objeto of arrayDePessoas) {
+    if (objeto.idade >= 18) {
+      arrayMaiorde18.push(objeto)
+    }
+  }
+  return arrayMaiorde18
 }
 
 // EXERCÍCIO 16B
