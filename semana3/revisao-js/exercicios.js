@@ -223,7 +223,8 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 
 // EXERCÍCIO 19A
 function ordenaPorNome(consultasNome) {
-
+  return consultasNome.sort((a, b) => a.nome.localeCompare(b.nome))
+  // Não consegui fazer sem o '.sort()'
 }
 
 // EXERCÍCIO 19B
