@@ -119,8 +119,8 @@ function ordenaArray(array) {
     for (let j = 0; j < tamanho; j++) {
       if (array[j] > array[j + 1]) {
         let temp = array[j]
-        array[j] = array[j+1]
-        array[j+1] = temp
+        array[j] = array[j + 1]
+        array[j + 1] = temp
       }
     }
   }
@@ -158,10 +158,10 @@ function criaRetangulo(lado1, lado2) {
 // EXERCÍCIO 15
 function anonimizaPessoa(pessoa) {
   return {
-  nome: "ANÔNIMO",
-	idade: pessoa.idade,
-	email: pessoa.email,
-	endereco: pessoa.endereco
+    nome: "ANÔNIMO",
+    idade: pessoa.idade,
+    email: pessoa.email,
+    endereco: pessoa.endereco
   }
 }
 
@@ -197,7 +197,8 @@ function verificaParidade(array) {
     } else {
       parOuImpar = 'ímpar'
       novoArray.push(`${item} é ímpar`)
-    }} 
+    }
+  }
   return novoArray
 }
 
@@ -221,7 +222,7 @@ function ordenaPorNome(consultasNome) {
 function ordenaPorData(consultasData) {
   consultasData.sort((a, b) => {
     a = a.dataDaConsulta.split('/').reverse().join(),
-    b = b.dataDaConsulta.split('/').reverse().join();
+      b = b.dataDaConsulta.split('/').reverse().join();
     return a.localeCompare(b)
   })
   return consultasData
