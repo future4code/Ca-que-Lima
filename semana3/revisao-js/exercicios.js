@@ -199,7 +199,17 @@ function multiplicaArrayPor2S(array) {
 
 // EXERCÍCIO 17C
 function verificaParidade(array) {
-
+  let novoArray = new Array
+  let parOuImpar
+  for (item of array) {
+    if (item % 2 === 0) {
+      parOuImpar = 'par'
+      novoArray.push(`${item} é ${parOuImpar}`)
+    } else {
+      parOuImpar = 'ímpar'
+      novoArray.push(`${item} é ${parOuImpar}`)
+    }} 
+  return novoArray
 }
 
 // EXERCÍCIO 18A
