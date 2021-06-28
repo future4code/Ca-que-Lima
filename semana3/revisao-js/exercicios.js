@@ -221,8 +221,8 @@ function ordenaPorNome(consultasNome) {
 // EXERCÍCIO 19B
 function ordenaPorData(consultasData) {
   consultasData.sort((a, b) => {
-    a = a.dataDaConsulta.split('/').reverse().join(),
-      b = b.dataDaConsulta.split('/').reverse().join();
+    a = a.dataDaConsulta.split('/').reverse().join()
+    b = b.dataDaConsulta.split('/').reverse().join()
     return a.localeCompare(b)
   })
   return consultasData
