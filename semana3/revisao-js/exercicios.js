@@ -167,23 +167,13 @@ function anonimizaPessoa(pessoa) {
 
 // EXERCÍCIO 16A
 function maioresDe18(arrayDePessoas) {
-  let arrayMaiorDe18 = new Array
-  for (objeto of arrayDePessoas) {
-    if (objeto.idade >= 18) {
-      arrayMaiorDe18.push(objeto)
-    }
-  }
+  let arrayMaiorDe18 = arrayDePessoas.filter(objeto => objeto.idade >= 18)
   return arrayMaiorDe18
 }
 
 // EXERCÍCIO 16B
 function menoresDe18(arrayDePessoas) {
-  let arrayMenoresDe18 = new Array
-  for (objeto of arrayDePessoas) {
-    if (objeto.idade < 18) {
-      arrayMenoresDe18.push(objeto)
-    }
-  }
+  let arrayMenoresDe18 = arrayDePessoas.filter(objeto => objeto.idade < 18)
   return arrayMenoresDe18
 }
 
