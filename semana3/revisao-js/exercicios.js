@@ -9,7 +9,13 @@ function inverteArray(array) {
 
 // EXERCÍCIO 02
 function retornaNumerosParesElevadosADois(array) {
-
+  let novoArray = []
+  for (numero of array) {
+    if (numero % 2 === 0) {
+      novoArray.push(Math.pow(numero, 2))
+    }
+  }
+  return novoArray
 }
 
 // EXERCÍCIO 03
