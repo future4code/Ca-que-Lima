@@ -229,10 +229,14 @@ function ordenaPorNome(consultasNome) {
 
 // EXERCÍCIO 19B
 function ordenaPorData(consultasData) {
-
+  return consultasData.sort((a, b) => new Date(a.dataDaConsulta) - new Date(b.dataDaConsulta))
 }
 
 // EXERCÍCIO 20
 function calculaSaldo(contas) {
-
+  for (objeto of contas) {
+    const somaCompras = objeto.compras.reduce((a, b) => a + b, 0)
+    objeto.saldoTotal -= somaCompras
+  }
+  return contas
 }
