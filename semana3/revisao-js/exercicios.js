@@ -229,7 +229,12 @@ function ordenaPorNome(consultasNome) {
 
 // EXERCÍCIO 19B
 function ordenaPorData(consultasData) {
-  return consultasData.sort((a, b) => new Date(a.dataDaConsulta) - new Date(b.dataDaConsulta))
+  consultasData.sort((a, b) => {
+    a = a.dataDaConsulta.split('/').reverse().join(),
+    b = b.dataDaConsulta.split('/').reverse().join();
+    return a.localeCompare(b)
+  })
+  return consultasData
 }
 
 // EXERCÍCIO 20
