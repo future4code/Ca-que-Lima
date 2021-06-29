@@ -192,10 +192,8 @@ function verificaParidade(array) {
   let novoArray = new Array
   for (item of array) {
     if (item % 2 === 0) {
-      parOuImpar = 'par'
       novoArray.push(`${item} é par`)
     } else {
-      parOuImpar = 'ímpar'
       novoArray.push(`${item} é ímpar`)
     }
   }
