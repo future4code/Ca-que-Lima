@@ -33,9 +33,6 @@ div>p:first-child {
     display: inline;
 }
 
-div img {
-    background: black;
-}
 
 .botao-amarelo {
     background-color: #ffaf43;
@@ -57,6 +54,7 @@ div img {
 
 .icone {
     height: 15px;
+    width: 15px;
 }
 
 
@@ -69,27 +67,14 @@ div img {
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
-    padding-top: 30px;
+    padding-top: 80px;
 }
 
-#container-de-descricao>p {
-    text-align: right;
-}
 
 #container-de-descricao>ol {
     padding: 15px 0px;
 }
 
-
-#identacao-1 {
-    position: relative;
-    right: 350px;
-}
-
-#identacao-2 {
-    position: relative;
-    right: 300px;
-}
 
 #container-para-comprar {
     background-color: #e7eb90;
@@ -122,6 +107,10 @@ table {
 
 td {
     text-align: center;
+}
+
+td > img {
+    max-width: 50px;
 }
 
 td button {
