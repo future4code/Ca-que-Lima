@@ -72,8 +72,28 @@ div img {
     padding-top: 30px;
 }
 
+#container-de-descricao>p {
+    text-align: right;
+}
+
 #container-de-descricao>ol {
     padding: 15px 0px;
+}
+
+#identacao-1 {
+    display: block;
+    position: relative;
+    right: 80px;
+}
+
+#identacao-2 {
+    position: relative;
+    right: 50px;
+}
+
+#identacao-3 {
+    position: relative;
+    right: 30px;
 }
 
 #container-para-comprar {
