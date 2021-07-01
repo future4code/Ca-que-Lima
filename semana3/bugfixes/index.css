@@ -80,20 +80,15 @@ div img {
     padding: 15px 0px;
 }
 
+
 #identacao-1 {
-    display: block;
     position: relative;
-    right: 80px;
+    right: 350px;
 }
 
 #identacao-2 {
     position: relative;
-    right: 50px;
-}
-
-#identacao-3 {
-    position: relative;
-    right: 30px;
+    right: 300px;
 }
 
 #container-para-comprar {
