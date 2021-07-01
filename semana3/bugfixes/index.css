@@ -17,6 +17,11 @@ h2 {
     text-align: center;
 }
 
+ol {
+    text-align: justify;
+    display: inline-block;
+}
+
 input {
     height: 20px;
     width: 500px;
@@ -37,10 +42,6 @@ button:hover {
 img {
     width: 100px;
 }
-
-/* div>p:first-child {
-    display: inline;
-} */
 
 
 .botao-amarelo {
