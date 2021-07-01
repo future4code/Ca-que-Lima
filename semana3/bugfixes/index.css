@@ -67,6 +67,13 @@ img {
     width: 15px;
 }
 
+.icone:hover {
+    opacity: 0.5;
+}
+
+.icone:active {
+    opacity: 1;
+}
 
 /** 
   *
