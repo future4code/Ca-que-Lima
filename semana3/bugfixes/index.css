@@ -7,6 +7,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 h2 {
@@ -37,9 +38,9 @@ img {
     width: 100px;
 }
 
-div>p:first-child {
+/* div>p:first-child {
     display: inline;
-}
+} */
 
 
 .botao-amarelo {
@@ -109,13 +110,16 @@ div:last-child {
     text-align: center;
 }
 
-table {
+.container-da-tabela {
+    margin: auto;
     width: 60%;
 }
 
-td {
+table {
+    width: 100%;
     text-align: center;
 }
+
 
 td > img {
     max-width: 50px;
