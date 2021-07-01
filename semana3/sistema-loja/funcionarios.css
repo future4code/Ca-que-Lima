@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px;
+}
+
+.menu {
+    padding: 10px;
+    text-align: center;
+    background: rgb(156, 156, 156);
+    font-size: 18px;
+}
+
+a {
+    color: white;
+    padding: 5px;
+}
+
+.titulo {
+    margin: 30px 20px;
+    font-size: 18px;
+}
+
+
+.conteudo {
+    margin: 5% 2%;
+}
+
+
+.rodape {
+    padding: 5px;
+    text-align: center;
+    background: rgb(2, 168, 77);
+    color: white;
+    font-size: 18px;
+}
+
+
+#rede-social {
+    display: inline;
+    max-width:30px;
+    max-height:30px;
+    width: auto;
+    height: auto;
+}
