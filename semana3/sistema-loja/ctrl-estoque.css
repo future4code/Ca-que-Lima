@@ -13,6 +13,7 @@ body {
 a {
     color: white;
     padding: 5px;
+    text-decoration: none;
 }
 
 .titulo {
@@ -22,6 +23,13 @@ a {
 
 .conteudo {
     margin: 5% 2%;
+}
+
+.conteudo table, td, th {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 
 .rodape {
@@ -45,9 +53,4 @@ a {
     max-height:100px;
     width: auto;
     height: auto;
-}
-
-td {
-    text-align: center;
-    padding: 10px;
 }
