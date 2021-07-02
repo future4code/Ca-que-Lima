@@ -29,16 +29,16 @@ a {
 }
 
 .menu {
-    display: inline;
     text-align: right;
-    position: relative;
-    top: 10px;
-    right: 10px;
+    top: 30px;
+    margin: 12px;
 }
 
 #contato {
     background-color: rgb(253, 253, 253);
 }
+
+/* ******************************************************** */
 
 .container {
     position: relative;
@@ -48,7 +48,7 @@ a {
     text-align: center;
 }
 
-.container h1, h2, h3, h4, p {
+.container h1, h2, h3, h4, p, li {
     padding: 5px;
 }
 
@@ -58,43 +58,33 @@ a {
 }
 
 
-.linha img {
-    max-width: 450px;
-    max-height: 450px;
-}
-
 .container > div {
     display: inline;
 }
 
-.linha {
-    display: flex;
-    position: relative;
-    top: 100px;
-    width: 900px;
-    margin: 50px auto;
+.container li {
+    margin-top: 20px;
 }
 
-.coluna {
-    flex: 50%;
+.container ul, ol {
+    text-align: left;
 }
 
-#texto-descritivo {
-    text-align: justify;
-    margin-left: 20px;
+form {
+    text-align: left;
+    margin-left: 28%;
 }
 
-#botão-portfolio {
-    background-color: lightsalmon;
-    height: 50px;
-    width: 200px;
-    font-size: medium;
-    border-radius: .25rem;
+input {
+    width: 300px;
+    height: 25px;
 }
 
-#botão-portfolio:hover {
-    background-color: rgba(255, 160, 122, 0.692);
+button {
+    padding: 5px;
 }
+
+/* ******************************************************** */
 
 .rodape {
     background-color: orange;

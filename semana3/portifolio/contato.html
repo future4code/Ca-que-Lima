@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="portfolio.css">
+    <link rel="stylesheet" href="contato.css">
 </head>
 <body>
 
@@ -18,22 +18,32 @@
             <nav>
                 <a href="index.html">Home</a>
                 <a href="sobre.html">Sobre</a>
-                <u><a href="portfolio.html">Portfólio</a></u>
-                <a href="contato.html" id="contato">Contato</a>
+                <a href="portfolio.html">Portfólio</a>
+                <u><a href="contato.html" id="contato">Contato</a></u>
             </nav>
         </div>
     </header>
 
     <main>
         <div class="container">
-            <h1>Meus projetos</h1>
+            <h1>Entre em contato comigo!</h1>
         </div>
 
-        <div>
-
+        <div class="container">
+            <form action="#">
+                <label for="nome">Nome Completo:</label><br>
+                <input type="text" id="nome" name="nome" placeholder="Digite aqui seu nome" required><br><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" placeholder="Digite aqui seu email" required><br><br>
+                <label for="mensagem">Mensagem:</label><br>
+                <textarea id="mensagem" name="mensagem" rows="10" cols="50" placeholder="Escreva aqui sua mensagem" required></textarea><br>
+                <button type="submit">Enviar</button>
+            </form>
         </div>
 
-
+        <div class="container">
+            <h3>Será um prazer falar com você!</h3>
+        </div>
 
 
         
