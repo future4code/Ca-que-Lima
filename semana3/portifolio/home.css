@@ -1,0 +1,111 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+}
+.cabecalho {
+    background-color: lightsalmon;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.logo {
+    display: inline;
+    position: relative;
+    top: 30px;
+}
+
+.menu {
+    display: inline;
+    text-align: right;
+    position: relative;
+    top: 10px;
+    right: 10px;
+}
+
+#contato {
+    background-color: rgb(253, 253, 253);
+}
+
+.container {
+    position: relative;
+    top: 100px;
+    width: 900px;
+    margin: 50px auto;
+}
+
+.container h1, h2, h3, h4, p {
+    padding: 5px;
+    text-align: center;
+}
+
+.container img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.linha img {
+    max-width: 450px;
+    max-height: 450px;
+}
+
+.container > div {
+    display: inline;
+}
+
+.linha {
+    display: flex;
+    position: relative;
+    top: 100px;
+    width: 900px;
+    margin: 50px auto;
+}
+
+.coluna {
+    flex: 50%;
+}
+
+#texto-descritivo {
+    text-align: justify;
+    margin-left: 20px;
+}
+
+
+
+
+
+
+
+/* 
+#sub-container-1 {
+    width: 50%;
+    margin-right: 5px;
+    position: relative;
+    left: 0;
+    display: inline;
+    background-color: rgb(27, 37, 180);
+}
+
+
+
+#sub-container-2 {
+    width: 50%;
+    margin-left: 5px;
+    position: relative;
+    right: 0;
+    display: inline;
+    background-color: black;
+}
+
+#sub-container-2 p {
+    text-align: justify;
+} */
