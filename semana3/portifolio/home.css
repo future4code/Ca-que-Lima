@@ -41,17 +41,18 @@ a {
     top: 100px;
     width: 900px;
     margin: 50px auto;
+    text-align: center;
 }
 
 .container h1, h2, h3, h4, p {
     padding: 5px;
-    text-align: center;
 }
 
 .container img {
     max-width: 400px;
     max-height: 400px;
 }
+
 
 .linha img {
     max-width: 450px;
@@ -79,33 +80,22 @@ a {
     margin-left: 20px;
 }
 
-
-
-
-
-
-
-/* 
-#sub-container-1 {
-    width: 50%;
-    margin-right: 5px;
-    position: relative;
-    left: 0;
-    display: inline;
-    background-color: rgb(27, 37, 180);
+#botão-portfolio {
+    background-color: lightsalmon;
+    height: 50px;
+    width: 200px;
+    font-size: medium;
+    border-radius: .25rem;
 }
 
-
-
-#sub-container-2 {
-    width: 50%;
-    margin-left: 5px;
-    position: relative;
-    right: 0;
-    display: inline;
-    background-color: black;
+#botão-portfolio:hover {
+    background-color: rgba(255, 160, 122, 0.692);
 }
 
-#sub-container-2 p {
-    text-align: justify;
-} */
+.rodape {
+    background-color: orange;
+    height: 80px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
