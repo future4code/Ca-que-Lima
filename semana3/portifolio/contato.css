@@ -17,7 +17,7 @@ a {
 .cabecalho {
     background-color: lightsalmon;
     height: 80px;
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
 }
@@ -42,7 +42,7 @@ a {
 
 .container {
     position: relative;
-    top: 100px;
+    top: 20px;
     width: 900px;
     margin: 50px auto;
     text-align: center;
