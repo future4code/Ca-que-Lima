@@ -62,13 +62,6 @@ a {
     display: inline;
 }
 
-.container li {
-    margin-top: 20px;
-}
-
-.container ul, ol {
-    text-align: left;
-}
 
 form {
     text-align: left;
