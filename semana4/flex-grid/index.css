@@ -86,7 +86,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 5px 5px 5px darkgrey;
+    box-shadow: 5px 5px 5px 3px darkgrey;
 }
 
 .conteudo h3, .conteudo p {
