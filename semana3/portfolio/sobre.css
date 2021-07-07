@@ -1,0 +1,104 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: rgb(223, 223, 223);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+}
+.cabecalho {
+    background-color: lightsalmon;
+    height: 80px;
+    position: relative;
+    top: 0;
+    width: 100%;
+}
+
+.logo {
+    display: inline;
+    position: relative;
+    top: 30px;
+}
+
+.menu {
+    text-align: right;
+    top: 30px;
+    margin: 12px;
+}
+
+#contato {
+    background-color: rgb(253, 253, 253);
+}
+
+/* ******************************************************** */
+
+.container {
+    position: relative;
+    top: 20px;
+    width: 900px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.container h1, h2, h3, h4, p, li {
+    padding: 5px;
+}
+
+.container img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+
+.container > div {
+    display: inline;
+}
+
+.container li {
+    margin-top: 20px;
+}
+
+.container ul, ol {
+    text-align: left;
+}
+
+
+.texto-descritivo {
+    text-align: justify;
+    margin-left: 20px;
+    font-style: oblique;
+}
+
+/* ******************************************************** */
+
+.rodape {
+    background-color: orange;
+    height: 80px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.rodape div {
+    display: inline;
+}
+
+.rodape p {
+    padding: 10px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.rodape img {
+    max-width: 20px;
+    margin: 0;
+}
