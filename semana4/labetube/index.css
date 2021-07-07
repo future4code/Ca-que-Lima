@@ -63,7 +63,6 @@ header a:hover {
 
 main {
     max-width: 80%;
-    height: 80%;
     margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
@@ -84,9 +83,8 @@ main > a:hover {
 }
 
 .card-video {
-    height: 400px;
+    height: 350px;
     width: 400px;
-    /* margin: 30px; */
     display: flex;
     flex-direction: column;
     box-shadow: 2px 2px 5px 2px lightgray;
@@ -95,11 +93,11 @@ main > a:hover {
 .card-video img {
     width: 100%;
     max-height: 80%;
-    margin-bottom: 12%;
 }
 
 .card-video h2 {
     margin-left: 15px;
+    margin-top: 20px;
     color: black;
 }
 
@@ -111,4 +109,47 @@ footer {
     padding: 20px;
     background-color: rgb(68, 68, 68);
     color: whitesmoke;
+}
+
+@media screen and (max-width: 450px) {
+    header {
+        padding: 10px;
+        height: 50px;
+    }
+    main > a {
+        margin: 15px;
+    }
+    
+    .card-video {
+        width: 300px;
+        height: 280px;
+    }
+
+    .card-video > h2 {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    header {
+        padding: 10px;
+        height: 50px;
+    }
+
+    .barra-busca input {
+        width: 150px;
+    }
+
+    main > a {
+        margin: 10px;
+    }
+    
+    .card-video {
+        width: 250px;
+        height: 250px;
+    }
+
+    .card-video > h2 {
+        font-size: 1.2em;
+    }
 }
