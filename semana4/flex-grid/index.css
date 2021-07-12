@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 60px 1fr 60px;
+}
+
+header {
+    display: flex;
+    background-color: mediumvioletred;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+    
+}
+
+header img {
+    max-height: 30px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+header button {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+/* ***************************************** */
+
+main {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 4fr;
+}
+
+.menu {
+    grid-column: 1 / span 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2d0e0;
+}
+
+.menu img {
+    max-height: 30px;
+}
+
+.menu li {
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu p {
+    margin-left: 20px;
+}
+
+.menu li > div {
+    display: flex;
+    align-items: center;
+}
+
+.conteudo {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.conteudo div {
+    height: 450px;
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 5px 5px 5px 3px darkgrey;
+}
+
+.conteudo h3, .conteudo p {
+    margin-bottom: 25px;
+}
+
+.conteudo img {
+    max-height: 298px;
+}
+
+/* ***************************************** */
+
+footer {
+    display: flex;
+    background-color: mediumvioletred;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+footer img {
+    max-height: 15px;
+}
