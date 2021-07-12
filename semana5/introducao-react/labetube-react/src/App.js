@@ -28,43 +28,46 @@ function App() {
             </nav>
 
             <section className="painel-de-videos">
-                <div className="box-pagina-principal media1" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=1 " alt="" />
-                    <h4>{titulo}</h4>
+                <div className="box-video-principal">
+                    <img src="https://picsum.photos/1920/1080?a=1" alt="" onClick={reproduzVideo}/>
+                    <h1 onClick={reproduzVideo}>{titulo}</h1>
                 </div>
-                <div className="box-pagina-principal media2" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=2 " alt="" />
-                    <h4>{titulo}</h4>
+                <div className="sidebar">
+                  <div className="box-sidebar" onClick={reproduzVideo}>
+                      <img src="https://picsum.photos/1024/768?a=2" alt="" />
+                      <h4>{titulo}</h4>
+                  </div>
+                  <div className="box-sidebar" onClick={reproduzVideo}>
+                      <img src="https://picsum.photos/1024/768?a=3" alt="" />
+                      <h4>{titulo}</h4>
+                  </div>
+                  <div className="box-sidebar" onClick={reproduzVideo}>
+                      <img src="https://picsum.photos/1024/768?a=4" alt="" />
+                      <h4>{titulo}</h4>
+                  </div>
+                  <div className="box-sidebar" onClick={reproduzVideo}>
+                      <img src="https://picsum.photos/1024/768?a=5" alt="" />
+                      <h4>{titulo}</h4>
+                  </div>
+                  <div className="box-sidebar" onClick={reproduzVideo}>
+                      <img src="https://picsum.photos/1024/768?a=6" alt="" />
+                      <h4>{titulo}</h4>
+                  </div>
+                  <div className="box-sidebar" onClick={reproduzVideo}>
+                      <img src="https://picsum.photos/1024/768?a=7" alt="" />
+                      <h4>{titulo}</h4>
+                  </div>
+                  <div className="box-sidebar" onClick={reproduzVideo}>
+                      <img src="https://picsum.photos/1024/768?a=8" alt="" />
+                      <h4>{titulo}</h4>
+                  </div>
                 </div>
-                <div className="box-pagina-principal media3" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=3 " alt="" />
-                    <h4>{titulo}</h4>
-                </div>
-                <div className="box-pagina-principal media4" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=4 " alt="" />
-                    <h4>{titulo}</h4>
-                </div>
-                <div className="box-pagina-principal media5" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=5 " alt="" />
-                    <h4>{titulo}</h4>
-                </div>
-                <div className="box-pagina-principal media6" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=6 " alt="" />
-                    <h4>{titulo}</h4>
-                </div>
-                <div className="box-pagina-principal media7" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=7 " alt="" />
-                    <h4>{titulo}</h4>
-                </div>
-                <div className="box-pagina-principal media8" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=8 " alt="" />
-                    <h4>{titulo}</h4>
-                </div>
+                
             </section>
         </main>
 
         <footer>
-            <h4>Oi! Eu moro no footer!</h4>
+            <h3>Oi! Eu moro no footer!</h3>
         </footer>
     </div>
   );
