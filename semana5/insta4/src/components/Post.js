@@ -104,8 +104,9 @@ class Post extends React.Component {
     this.setState({
       compartilhando: false
     })
-    const redeSocial = event.target.textContent
-    console.log(`Foi compartilhado no ${redeSocial}`)
+    const redeSocial = event.target.id
+    const mensagem = event.target.value
+    console.log(`Post compartilhado no ${redeSocial} com a seguinte mensagem: ${mensagem}`)
   }
 
   onClickBookmark = () => {

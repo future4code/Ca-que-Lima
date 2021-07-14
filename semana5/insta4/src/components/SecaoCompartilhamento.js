@@ -42,9 +42,9 @@ export class SecaoCompartilhamento extends React.Component {
                 />
                 
                 <div>
-                    <button onClick={this.props.aoCompartilhar}>Instagram</button>
-                    <button onClick={this.props.aoCompartilhar}>Facebook</button>
-                    <button onClick={this.props.aoCompartilhar}>Twitter</button>
+                    <button id="Instagram" value={this.state.mensagem} onClick={this.props.aoCompartilhar}>Instagram</button>
+                    <button id="Facebook" value={this.state.mensagem} onClick={this.props.aoCompartilhar}>Facebook</button>
+                    <button id="Twitter" value={this.state.mensagem} onClick={this.props.aoCompartilhar}>Twitter</button>
                 </div>
             </ShareContainer>
         )
