@@ -100,11 +100,12 @@ class Post extends React.Component {
     })
   }
 
-  aoCompartilhar = () => {
+  aoCompartilhar = (event) => {
     this.setState({
       compartilhando: false
     })
-    console.log(`Foi compartilhado no ${''}`)
+    const redeSocial = event.target.textContent
+    console.log(`Foi compartilhado no ${redeSocial}`)
   }
 
   onClickBookmark = () => {
@@ -148,45 +149,48 @@ class Post extends React.Component {
       componenteCompartilhamento = <SecaoCompartilhamento aoCompartilhar={this.aoCompartilhar} />
     }
 
-    return <PostContainer>
-      <PostHeader>
-        <UserPhoto src={this.props.fotoUsuario} alt={'Imagem do usuario'}/>
-        <p>{this.props.nomeUsuario}</p>
-      </PostHeader>
+    return (
+      <PostContainer>
+        <PostHeader>
+          <UserPhoto src={this.props.fotoUsuario} alt={'Imagem do usuario'}/>
+          <p>{this.props.nomeUsuario}</p>
+        </PostHeader>
 
-      <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'}/>
+        <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'}/>
 
-      <PostFooter>
-        <div>
-          <IconeComContador
-            icone={iconeCurtida}
-            onClickIcone={this.onClickCurtida}
-            valorContador={this.state.numeroCurtidas}
-          />
+        <PostFooter>
+          <div>
+            <IconeComContador
+              icone={iconeCurtida}
+              onClickIcone={this.onClickCurtida}
+              valorContador={this.state.numeroCurtidas}
+            />
 
-          <IconeComContador
-            icone={iconeComentario}
-            onClickIcone={this.onClickComentario}
-            valorContador={this.state.numeroComentarios}
-          />
+            <IconeComContador
+              icone={iconeComentario}
+              onClickIcone={this.onClickComentario}
+              valorContador={this.state.numeroComentarios}
+            />
 
-          <IconeSemContador
-            icone={iconeEnviar}
-            onClickIcone={this.onClickCompartilhar}
-          />
-        </div>
+            <IconeSemContador
+              icone={iconeEnviar}
+              onClickIcone={this.onClickCompartilhar}
+            />
+          </div>
 
-        <div>
-          <IconeSemContador
-            icone={iconeSalvo}
-            onClickIcone={this.onClickBookmark}
-          />
-        </div>
-      </PostFooter>
-      {componenteComentario}
-      {componenteCompartilhamento}
+          <div>
+            <IconeSemContador
+              icone={iconeSalvo}
+              onClickIcone={this.onClickBookmark}
+            />
+          </div>
+        </PostFooter>
+        {componenteComentario}
+        {componenteCompartilhamento}
     </PostContainer>
+    )
   }
 }
+ 
 
 export default Post
