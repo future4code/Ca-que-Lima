@@ -100,12 +100,11 @@ class Post extends React.Component {
     })
   }
 
-  aoCompartilhar = (event) => {
+  aoCompartilhar = (event, mensagem) => {
     this.setState({
       compartilhando: false
     })
     const redeSocial = event.target.id
-    const mensagem = event.target.value
     console.log(`Post compartilhado no ${redeSocial} com a seguinte mensagem: ${mensagem}`)
   }
 
