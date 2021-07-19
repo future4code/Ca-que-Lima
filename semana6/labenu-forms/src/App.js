@@ -13,7 +13,7 @@ const BotaoProxima = styled.button`
 
 class App extends React.Component {
   state = {
-    pessoas: [{
+    pessoa: {
       nome: "",
       idade: "",
       email: "",
@@ -22,7 +22,7 @@ class App extends React.Component {
       unidadeEnsino: "",
       justificativa: "",
       cursoComplementar: ""
-    }],
+    },
 
     etapa: 1
   }
@@ -47,8 +47,6 @@ class App extends React.Component {
   }
 
   render() {
-
-
     return (
       <div className="App">
         {this.renderizaEtapa()}
