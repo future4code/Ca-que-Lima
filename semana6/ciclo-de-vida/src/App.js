@@ -1,21 +1,39 @@
 import React from 'react'
 import styled from 'styled-components'
-import './styles.css'
+import './styles.css'// eslint-disable-next-line
+import iconeLixo from './img/iconeLixo.svg'
+import iconeEdit from './img/iconeEdit.svg'
 
 const TarefaList = styled.ul`
   padding: 0;
-  width: 200px;
+  width: 300px;
+  margin-bottom: 100px;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px, auto;
+  }
 `
 
 const Tarefa = styled.li`
   text-align: left;
-  text-decoration: ${({ completa }) => (completa ? 'line-through' : 'none')};
+  text-decoration: ${({ completa }) => (completa ? 'line-through' : 'none')}; 
 `
 
 const InputsContainer = styled.div`
   display: grid;
   grid-auto-flow: column;
   gap: 10px;
+`
+
+const ContainerIcones = styled.div`
+  display: flex;
+  align-items: center;
+
+  > img {
+    margin-left: 10px;
+  }
 `
 
 class App extends React.Component {
@@ -64,17 +82,41 @@ class App extends React.Component {
     this.setState({ tarefas: listaTarefaAlterada })
   }
 
+  editaTarefa = (id) => {
+    const novoNome = prompt('Digite o novo nome da tarefa')
+    const listaTarefaAlterada = this.state.tarefas.map(tarefa => {
+      if (id === tarefa.id) {
+        const tarefaAlterada = { ...tarefa, texto: novoNome }
+        return tarefaAlterada
+      } else {
+        return tarefa
+      }
+    })
+    this.setState({ tarefas: listaTarefaAlterada })
+  }
+
   apagaTarefa = (id) => {
     if (window.confirm(`Quer apagar a tarefa?`)) {
       const novaListaTarefas = this.state.tarefas.filter(tarefa => {
         return id !== tarefa.id
       })
-      this.setState({tarefas: novaListaTarefas})
+      this.setState({ tarefas: novaListaTarefas })
     }
   }
 
   onChangeFilter = (event) => {
     this.setState({ filtro: event.target.value })
+  }
+
+  apagaTudo = () => {
+    if (window.confirm('Tem certeza que quer apagar tudo?')) {
+      localStorage.clear()
+      this.setState({
+        tarefas: [],
+        inputValue: ''
+      })
+    }
+    alert('Tarefas apagadas')
   }
 
   render() {
@@ -91,34 +133,65 @@ class App extends React.Component {
 
     return (
       <div className="App">
+
         <h1>Lista de tarefas</h1>
         <InputsContainer>
           <input value={this.state.inputValue} onChange={this.onChangeInput} />
           <button onClick={this.criaTarefa}>Adicionar</button>
         </InputsContainer>
+
         <br />
 
-        <InputsContainer>
+        {/* <InputsContainer>
           <label>Filtro</label>
           <select value={this.state.filtro} onChange={this.onChangeFilter}>
             <option value="">Nenhum</option>
             <option value="pendentes">Pendentes</option>
             <option value="completas">Completas</option>
           </select>
-        </InputsContainer>
+        </InputsContainer> */}
+
         <TarefaList>
+          <h3>Tarefas pendentes</h3>
           {listaFiltrada.map(tarefa => {
-            return (
-              <Tarefa
-                completa={tarefa.completa}
-                onClick={() => this.selectTarefa(tarefa.id)}
-                onDoubleClick={() => this.apagaTarefa(tarefa.id)}
-              >
-                {tarefa.texto}
-              </Tarefa>
+            return (!tarefa.completa &&
+              <div>
+                <Tarefa
+                  completa={tarefa.completa}
+                  onClick={() => this.selectTarefa(tarefa.id)}
+                >
+                  {tarefa.texto}
+                </Tarefa>
+                <ContainerIcones>
+                  <img src={iconeEdit} alt="Ícone para editar" onClick={() => this.editaTarefa(tarefa.id)} />
+                  <img src={iconeLixo} alt="Ícone para apagar" onClick={() => this.apagaTarefa(tarefa.id)} />
+                </ContainerIcones>
+              </div>
             )
           })}
         </TarefaList>
+
+        <TarefaList>
+          <h3>Tarefas completas</h3>
+          {listaFiltrada.map(tarefa => {
+            return (tarefa.completa &&
+              <div>
+                <Tarefa
+                  completa={tarefa.completa}
+                  onClick={() => this.selectTarefa(tarefa.id)}
+                >
+                  {tarefa.texto}
+                </Tarefa>
+                <ContainerIcones>
+                  <img src={iconeEdit} alt="Ícone para editar" onClick={() => this.editaTarefa(tarefa.id)} />
+                  <img src={iconeLixo} alt="Ícone para apagar" onClick={() => this.apagaTarefa(tarefa.id)} />
+                </ContainerIcones>
+              </div>
+            )
+          })}
+        </TarefaList>
+
+        <button onClick={this.apagaTudo}>Apagar tudo</button>
       </div>
     )
   }
