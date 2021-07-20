@@ -64,8 +64,17 @@ class App extends React.Component {
     this.setState({ tarefas: listaTarefaAlterada })
   }
 
-  onChangeFilter = (event) => {
+  apagaTarefa = (id) => {
+    if (window.confirm(`Quer apagar a tarefa?`)) {
+      const novaListaTarefas = this.state.tarefas.filter(tarefa => {
+        return id !== tarefa.id
+      })
+      this.setState({tarefas: novaListaTarefas})
+    }
+  }
 
+  onChangeFilter = (event) => {
+    this.setState({ filtro: event.target.value })
   }
 
   render() {
@@ -91,7 +100,7 @@ class App extends React.Component {
 
         <InputsContainer>
           <label>Filtro</label>
-          <select value={this.state.filter} onChange={this.onChangeFilter}>
+          <select value={this.state.filtro} onChange={this.onChangeFilter}>
             <option value="">Nenhum</option>
             <option value="pendentes">Pendentes</option>
             <option value="completas">Completas</option>
@@ -103,6 +112,7 @@ class App extends React.Component {
               <Tarefa
                 completa={tarefa.completa}
                 onClick={() => this.selectTarefa(tarefa.id)}
+                onDoubleClick={() => this.apagaTarefa(tarefa.id)}
               >
                 {tarefa.texto}
               </Tarefa>
