@@ -115,8 +115,8 @@ class App extends React.Component {
         tarefas: [],
         inputValue: ''
       })
+      alert('Tarefas apagadas')
     }
-    alert('Tarefas apagadas')
   }
 
   render() {
