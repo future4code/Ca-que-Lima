@@ -57,6 +57,17 @@ const PostPhoto = styled.img`
   width: 100%;
 `
 
+const ContainerComentario = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  height: 30px;
+  
+  > h4 {
+    margin-right: 5px;
+  }
+`
+
 class Post extends React.Component {
   state = {
     curtido: false,
@@ -64,7 +75,9 @@ class Post extends React.Component {
     comentando: false,
     numeroComentarios: 0,
     salvo: false,
-    compartilhando: false
+    compartilhando: false,
+    comentado: false,
+    comentarios: []
   }
 
   onClickCurtida = () => {
@@ -87,10 +100,12 @@ class Post extends React.Component {
     })
   }
   
-  aoEnviarComentario = () => {
+  aoEnviarComentario = (comentario) => {
     this.setState({
       comentando: false,
-      numeroComentarios: this.state.numeroComentarios + 1
+      comentado: true,
+      numeroComentarios: this.state.numeroComentarios + 1,
+      comentarios: [...this.state.comentarios, comentario]
     })
   }
 
@@ -100,12 +115,11 @@ class Post extends React.Component {
     })
   }
 
-  aoCompartilhar = (event) => {
+  aoCompartilhar = (event, mensagem) => {
     this.setState({
       compartilhando: false
     })
     const redeSocial = event.target.id
-    const mensagem = event.target.value
     console.log(`Post compartilhado no ${redeSocial} com a seguinte mensagem: ${mensagem}`)
   }
 
@@ -124,7 +138,7 @@ class Post extends React.Component {
   render() {
     let iconeCurtida
 
-    if(this.state.curtido) {
+    if (this.state.curtido) {
       iconeCurtida = iconeCoracaoPreto
     } else {
       iconeCurtida = iconeCoracaoBranco
@@ -132,7 +146,7 @@ class Post extends React.Component {
 
     let iconeSalvo
 
-    if(this.state.salvo) {
+    if (this.state.salvo) {
       iconeSalvo = iconeBookmark
     } else {
       iconeSalvo = iconeBookmarkBorder
@@ -140,7 +154,7 @@ class Post extends React.Component {
 
     let componenteComentario
 
-    if(this.state.comentando) {
+    if (this.state.comentando) {
       componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario}/>
     }
 
@@ -148,6 +162,18 @@ class Post extends React.Component {
 
     if (this.state.compartilhando) {
       componenteCompartilhamento = <SecaoCompartilhamento aoCompartilhar={this.aoCompartilhar} />
+    }
+
+    let listaComentarios
+
+    if (this.state.comentado) {
+      listaComentarios = this.state.comentarios.map((comentario, index) => {
+        return (
+          <ContainerComentario key={index}>
+            <h4>Comentário {index + 1}:</h4><span>{comentario}</span>
+          </ContainerComentario>
+        ) 
+      })
     }
 
     return (
@@ -186,6 +212,7 @@ class Post extends React.Component {
             />
           </div>
         </PostFooter>
+        {listaComentarios}
         {componenteComentario}
         {componenteCompartilhamento}
     </PostContainer>
