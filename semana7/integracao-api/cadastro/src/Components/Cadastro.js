@@ -2,20 +2,40 @@ import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
+const Container = styled.div`
+    width: 400px;
+    height: 320px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > h3 {
+        margin-bottom: 5px;
+    }
+
+    > button {
+        margin: 15px;
+        padding: 3px;
+    }
+`
+
 class Cadastro extends React.Component {
     render() {
         return (
-            <>
-                <h1>Olá</h1>
-                <h4>Cadastro</h4>
-                <p>Nome:</p>
-                <input value={this.props.inputNome} onChange={this.props.atualizaNome} />
-                <p>Email:</p>
-                <input value={this.props.inputEmail} onChange={this.props.atualizaEmail} />
-                <br />
-                <button onClick={this.props.criaUsuario}>Enviar</button>
-                <br />
-            </>
+            <Container>
+                <h3>Cadastro</h3>
+                <div>
+                    <p>Nome:</p>
+                    <input value={this.props.valorNome} onChange={this.props.atualizaNome} />
+                </div>
+                <div>
+                    <p>Email:</p>
+                    <input value={this.props.valorEmail} onChange={this.props.atualizaEmail} />
+                </div>
+                <button onClick={this.props.criaUsuario}>Salvar</button>
+                <button onClick={this.props.alteraPagina}>Ir para lista</button>
+            </Container>
         )
     }
 }

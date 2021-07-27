@@ -17,7 +17,6 @@ const headers = {
   }
 }
 
-
 class App extends React.Component {
   state = {
     usuarios: [],
@@ -66,37 +65,40 @@ class App extends React.Component {
   }
 
   apagaUsuario = (id) => {
-    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
-      .then((res) => {
-        alert('Usuário deletado com sucesso')
-        this.pegaLista()
-      })
-      .catch((err) => {
-        console.log(err.response.data.message)
-      })
+    if (window.confirm('Tem certeza que deseja apagar?')) {
+      axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, headers)
+        .then((res) => {
+          alert('Usuário deletado com sucesso')
+          this.pegaLista()
+        })
+        .catch((err) => {
+          console.log(err.response.data.message)
+        })
+    }
+  }
+
+  alteraPagina = () => {
+    this.setState({ logado: !this.state.logado })
   }
 
   render() {
-
-    const listaUsuarios = this.state.usuarios.map(usuario => {
-      return <li key={usuario.id}>{usuario.name} <button onClick={() => this.apagaUsuario(usuario.id)}>Apagar</button></li>
-    })
-
-    console.log(listaUsuarios)
     return (
       <Container>
+        <h1>Bem vindo(a)</h1>
         {this.state.logado ?
           <Lista
             usuarios={this.state.usuarios}
             apagaUsuario={this.apagaUsuario}
+            alteraPagina={this.alteraPagina}
           />
-          : 
+          :
           <Cadastro
             valorNome={this.state.inputNome}
             valorEmail={this.state.inputEmail}
             atualizaNome={this.atualizaNome}
             atualizaEmail={this.atualizaEmail}
             criaUsuario={this.criaUsuario}
+            alteraPagina={this.alteraPagina}
           />}
       </Container>
     )

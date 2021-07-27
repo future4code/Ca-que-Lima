@@ -2,19 +2,39 @@ import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
+const ContainerGeral = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+        padding: 3px;
+    }
+`
+
+const ContainerLi = styled.li`
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin: 10px;
+`
+
 class Lista extends React.Component {
     render() {
         const listaUsuarios = this.props.usuarios.map(usuario => {
-            return <li key={usuario.id}>{usuario.name} <button onClick={() => this.props.apagaUsuario(usuario.id)}>Apagar</button></li>
+            return <ContainerLi key={usuario.id}>{usuario.name} <button onClick={() => this.props.apagaUsuario(usuario.id)}>Apagar</button></ContainerLi>
           })
 
         const listaOrdenada = listaUsuarios.sort((a, b) => {
             return a.props.children[0].localeCompare(b.props.children[0])
         })
         return (
-            <div>
+            <ContainerGeral>
+                <h3>Usuários</h3>
                 {listaOrdenada}
-            </div>
+                <br />
+                <button onClick={this.props.alteraPagina}>Voltar</button>
+            </ContainerGeral>
         )
     }
 }
