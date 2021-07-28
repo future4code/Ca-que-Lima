@@ -69,10 +69,6 @@ const ContainerBotoes = styled.div`
     }
 `
 
-const BotaoApagar = styled.button`
-    background-color: #C72B00;
-`
-
 const url = 'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users'
 
 const headers = {

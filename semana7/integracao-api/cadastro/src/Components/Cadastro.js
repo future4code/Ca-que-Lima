@@ -103,7 +103,7 @@ class Cadastro extends React.Component {
             <Container>
 
                 <ContainerCadastro>
-                    <h3>Cadastro</h3>
+                    <h2>Cadastro</h2>
                     <div>
                         <p>Nome:</p>
                         <input value={this.state.inputNome} onChange={this.atualizaNome} />
