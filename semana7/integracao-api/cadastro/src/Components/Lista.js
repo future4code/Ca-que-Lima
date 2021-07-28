@@ -7,13 +7,33 @@ const ContainerGeral = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 50px;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 3px lightgray;
 
     button {
-        padding: 3px;
+
+        padding: 10px;
+        background-color: #5CB85C;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        transition: 0.3s;
     }
+
     button:hover {
         cursor: pointer;
+        box-shadow: 0 0 5px 3px lightgray;
     }
+`
+
+const ContainerUsuarios = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 `
 
 const ContainerLi = styled.li`
@@ -21,8 +41,45 @@ const ContainerLi = styled.li`
     justify-content: space-between;
     width: 300px;
     margin: 10px;
-    border: 1px solid black;
     padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 3px lightgray;
+
+    > div > button {
+        background-color: #C72B00;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        width: 30px;
+        padding: 5px;
+    }
+`
+
+const ContainerNome = styled.div`
+    transition: 0.1s;
+    &:hover {
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+`
+
+const ContainerBusca = styled.div`
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+    input {
+        height: 20px;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 3px lightgray;
+    }
 `
 
 const url = 'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users'
@@ -38,7 +95,8 @@ class Lista extends React.Component {
     state = {
         usuarios: [],
         detalhes: false,
-        usuarioDetalhado: {}
+        usuarioDetalhado: {},
+        nomeFiltro: ""
     }
 
     componentDidMount() {
@@ -89,15 +147,34 @@ class Lista extends React.Component {
         this.setState({ detalhes: false, usuarioDetalhado: {} })
     }
 
+    filtraUsuario = () => {
+        axios.get(`${url}/search?name=${this.state.nomeFiltro}`, headers)
+            .then(res => {
+                if (this.state.nomeFiltro) {
+                    this.setState({ usuarios: res.data })
+                } else {
+                    this.pegaLista()
+                }
+
+            })
+            .catch(err => {
+                alert(err.response.data.message)
+            })
+    }
+
+    atualizaFiltro = (e) => {
+        this.setState({ nomeFiltro: e.target.value })
+    }
+
     render() {
         const listaUsuarios = this.state.usuarios.map(usuario => {
             return (
                 <ContainerLi key={usuario.id}>
-                    <div onDoubleClick={() => this.selecionaUsuario(usuario.id)}>
+                    <ContainerNome onClick={() => this.selecionaUsuario(usuario.id)}>
                         {usuario.name}
-                    </div>
+                    </ContainerNome>
                     <div>
-                        <button onClick={() => this.apagaUsuario(usuario.id)}>Apagar</button>
+                        <button onClick={() => this.apagaUsuario(usuario.id)}>X</button>
                     </div>
                 </ContainerLi>
             )
@@ -120,12 +197,16 @@ class Lista extends React.Component {
                         selecionaUsuario={this.selecionaUsuario}
                     />
                     :
-                    <ContainerGeral>
+                    <ContainerUsuarios>
                         <h3>Usuários</h3>
-                        {listaOrdenada}
+                        <ContainerBusca>
+                            <input placeholder="Pesquisar nome..." value={this.state.nomeFiltro} onChange={this.atualizaFiltro} />
+                            <button onClick={this.filtraUsuario}>Buscar</button>
+                        </ContainerBusca>
+                        {this.state.usuarios.length ? listaOrdenada : <em>Nenhum usuário cadastrado</em>}
                         <br />
                         <button onClick={this.props.alteraPagina}>Voltar</button>
-                    </ContainerGeral>
+                    </ContainerUsuarios>
                 }
             </ContainerGeral>
         )

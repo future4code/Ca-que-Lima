@@ -6,6 +6,8 @@ const ContainerGeral = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 300px;
+    
     > button {
         margin-top: 15px;
     }
@@ -14,8 +16,20 @@ const ContainerGeral = styled.div`
 const ContainerDados = styled.div`
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
     padding: 0 20px;
+    min-width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 3px lightgray;
+    > p {
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+    > p > span {
+        font-weight: 400;
+        margin-left: 10px;
+    }
+
     > button {
         margin-bottom: 15px;
         width: 70px;
@@ -28,6 +42,11 @@ const ContainerEdição = styled.div`
     flex-direction: column;
     > input {
         margin-bottom: 15px;
+        height: 20px;
+        border: none;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px lightgray;
     }
     > button {
         margin-bottom: 15px;
@@ -45,7 +64,15 @@ const ContainerBotoes = styled.div`
     justify-content: space-between;
     width: 100%;
     margin-top: 15px;
+    > div > button {
+        background-color: #C72B00;
+    }
 `
+
+const BotaoApagar = styled.button`
+    background-color: #C72B00;
+`
+
 const url = 'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users'
 
 const headers = {
@@ -76,9 +103,9 @@ class Detalhes extends React.Component {
 
     salvaEdicao = (id) => {
 
-        const body = {
-            name: this.state.inputNome,
-            email: this.state.inputEmail
+        const body = { //Evita que salve nome ou email vazio
+            name: this.state.inputNome ? this.state.inputNome : this.props.nome,
+            email: this.state.inputEmail ? this.state.inputEmail : this.props.email
         }
         axios.put(`${url}/${id}`, body, headers)
             .then(res => {
@@ -107,14 +134,16 @@ class Detalhes extends React.Component {
         )
         return (
             <ContainerGeral>
-                <h4>Detalhes</h4>
+                <h2>Detalhes</h2>
                 <ContainerDados>
-                    <p>Nome: {this.props.nome}</p>
-                    <p>Email: {this.props.email}</p>
+                    <p>Nome: <span>{this.props.nome}</span></p>
+                    <p>Email: <span>{this.props.email}</span></p>
                     {this.state.editando ? input : <button onClick={this.alternaEdicao}>Editar</button>}
                 </ContainerDados>
                 <ContainerBotoes>
-                    <button onClick={() => this.props.apagaUsuario(this.props.id)}>Apagar Usuário</button>
+                    <div>
+                        <button onClick={() => this.props.apagaUsuario(this.props.id)}>Apagar Usuário</button>
+                    </div>
                     <button onClick={this.props.voltar}>Voltar</button>
                 </ContainerBotoes>
             </ContainerGeral>
