@@ -198,7 +198,7 @@ class Lista extends React.Component {
                     />
                     :
                     <ContainerUsuarios>
-                        <h3>Usuários</h3>
+                        <h2>Usuários</h2>
                         <ContainerBusca>
                             <input placeholder="Pesquisar nome..." value={this.state.nomeFiltro} onChange={this.atualizaFiltro} />
                             <button onClick={this.filtraUsuario}>Buscar</button>
