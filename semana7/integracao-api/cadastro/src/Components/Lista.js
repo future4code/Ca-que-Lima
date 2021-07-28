@@ -38,6 +38,7 @@ const ContainerUsuarios = styled.div`
 
 const ContainerLi = styled.li`
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 300px;
     margin: 10px;
