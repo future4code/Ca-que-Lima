@@ -11,6 +11,9 @@ const ContainerGeral = styled.div`
     button {
         padding: 3px;
     }
+    button:hover {
+        cursor: pointer;
+    }
 `
 
 const ContainerLi = styled.li`
@@ -113,6 +116,8 @@ class Lista extends React.Component {
                         voltar={this.voltaPagina}
                         apagaUsuario={this.apagaUsuario}
                         id={this.state.usuarioDetalhado.id}
+                        pegaLista={this.pegaLista}
+                        selecionaUsuario={this.selecionaUsuario}
                     />
                     :
                     <ContainerGeral>
