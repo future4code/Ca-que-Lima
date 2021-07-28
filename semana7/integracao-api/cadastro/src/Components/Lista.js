@@ -59,7 +59,7 @@ class Lista extends React.Component {
                 .then((res) => {
                     alert('Usuário deletado com sucesso')
                     this.pegaLista()
-                    this.setState({detalhes: false, usuarioDetalhado: {}})
+                    this.setState({ detalhes: false, usuarioDetalhado: {} })
                 })
                 .catch((err) => {
                     alert(err.response.data.message)
@@ -83,7 +83,7 @@ class Lista extends React.Component {
     }
 
     voltaPagina = () => {
-        this.setState({ detalhes: false, usuarioDetalhado: {}})
+        this.setState({ detalhes: false, usuarioDetalhado: {} })
     }
 
     render() {
@@ -107,8 +107,8 @@ class Lista extends React.Component {
         return (
             <ContainerGeral>
                 {this.state.detalhes ?
-                    <Detalhes 
-                        nome={this.state.usuarioDetalhado.name} 
+                    <Detalhes
+                        nome={this.state.usuarioDetalhado.name}
                         email={this.state.usuarioDetalhado.email}
                         voltar={this.voltaPagina}
                         apagaUsuario={this.apagaUsuario}
