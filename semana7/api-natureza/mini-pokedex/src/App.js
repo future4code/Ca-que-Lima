@@ -23,6 +23,12 @@ const Main = styled.div`
   align-items: center;
   color: white;
   background-color: #ff7c7c;
+
+  > select {
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+  }
 `
 
 class App extends React.Component {
