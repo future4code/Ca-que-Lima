@@ -17,29 +17,38 @@ export const Header = styled.div`
 
     > button {
         margin-left: 10px;
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     > p {
-        margin-right: 162px;
+        margin-right: 146px;
+        font-style: italic;
+        font-weight: 600;
     }
 `
 
 export const Body = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 10px;
+    min-height: 500px;
+    overflow-y: scroll;
 `
 
 export const ContainerMatch = styled.div`
     display: flex;
     align-items: center;
     margin: 10px;
-    /* justify-content: flex-start; */
 
     > img {
         max-width: 50px;
         margin-right: 10px;
         border-radius: 5px;
+    }
+
+    > P {
+        font-size: 1.2rem;
     }
 `

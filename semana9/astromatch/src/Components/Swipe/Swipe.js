@@ -27,6 +27,9 @@ function Swipe(props) {
             choice: true
         }
         axios.post(`${baseUrl}choose-person`, body).then(res => {
+            if (res.data.isMatch) {
+                alert('Match!!!!111!!!!!!1!!1')
+            }
             setProfile({})
             getProfile()
         }).catch(err => {
@@ -51,14 +54,14 @@ function Swipe(props) {
     return (
         <Container>
             <Header>
-                <p>Astromatch</p>
+                <p>ASTROMACH</p>
                 <button onClick={() => props.updateScreen('matches')}>Matches</button>
             </Header>
 
             <Body>
                 {Object.keys(profile).length ? (
-                    <ContainerProfile image={profile.image}>
-                        <img src={profile.photo} />
+                    <ContainerProfile image={profile.photo}>
+                        <img src={profile.photo} alt="Imagem de Capa"/>
                         <div>
                             <h4>{profile.name},</h4> <span>{profile.age}</span>
                             <p>{profile.bio}</p>
@@ -70,8 +73,8 @@ function Swipe(props) {
             </Body>
 
             <Footer>
-                <button onClick={dismissProfile}>Não</button>
-                <button onClick={chooseProfile}>Sim</button>
+                <button onClick={dismissProfile}>NOPE</button>
+                <button onClick={chooseProfile}>YEP</button>
             </Footer>
         </Container>
     )

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import { Container, Header, Body, ContainerMatch } from './styles'
 import axios from "axios";
 
@@ -30,17 +29,15 @@ function Matches(props) {
         )
     })
 
-    console.log(matches)
     return (
         <Container>
             <Header>
-                <button onClick={() => props.updateScreen('swipe')}>Matches</button>
-                <p>Astromatch</p>
+                <button onClick={() => props.updateScreen('swipe')}>Voltar</button>
+                <p>ASTROMACH</p>
             </Header>
             <Body>
                 {matchList}
             </Body>
-
         </Container>
     )
 }

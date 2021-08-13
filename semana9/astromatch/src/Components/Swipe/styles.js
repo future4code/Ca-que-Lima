@@ -16,11 +16,16 @@ export const Header = styled.div`
     justify-content: center;
 
     > button {
-        margin-left: 80px;
+        margin-left: 70px;
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     > p {
         margin-left: 140px;
+        font-style: italic;
+        font-weight: 600;
     }
 `
 
@@ -29,7 +34,6 @@ export const Body = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
 `
 
 export const ContainerProfile = styled.div`
@@ -37,7 +41,7 @@ export const ContainerProfile = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-image: ${props => `url(${props.image})`};
+    padding-top: 10px;
     width: 100%;
     height: 500px;
 
@@ -48,7 +52,9 @@ export const ContainerProfile = styled.div`
 
     > div {
         align-self: flex-start;
-        margin-left: 20px;
+        min-width: 360px;
+        background-color: lightgrey;
+        padding: 20px;
     }
 
     h4 {
@@ -61,4 +67,25 @@ export const Footer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    > button {
+        padding: 10px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: 0.3s;
+
+        &:hover {
+            cursor: pointer;
+            padding: 15px;
+        }
+    }
+
+    > :nth-child(1) {
+        background-color: red;
+    }
+
+    > :nth-child(2) {
+        background-color: green;
+    }
 `
