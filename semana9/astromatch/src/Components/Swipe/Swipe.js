@@ -57,7 +57,7 @@ function Swipe(props) {
 
             <Body>
                 {Object.keys(profile).length ? (
-                    <ContainerProfile>
+                    <ContainerProfile image={profile.image}>
                         <img src={profile.photo} />
                         <div>
                             <h4>{profile.name},</h4> <span>{profile.age}</span>

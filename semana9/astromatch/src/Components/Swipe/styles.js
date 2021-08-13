@@ -37,6 +37,7 @@ export const ContainerProfile = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    background-image: ${props => `url(${props.image})`};
     width: 100%;
     height: 500px;
 
