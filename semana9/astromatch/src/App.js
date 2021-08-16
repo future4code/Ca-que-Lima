@@ -47,6 +47,7 @@ function App() {
   const clearMatches = () => {
     axios.put('https://us-central1-missao-newton.cloudfunctions.net/astroMatch/caiquelima/clear').then(res => {
       alert('Sucesso')
+      window.location.reload()
     }).catch(err => {
       console.log(err.response)
     })
