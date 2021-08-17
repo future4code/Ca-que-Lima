@@ -3,7 +3,7 @@
 function ListTrip() {
     return (
       <div>
-        
+        <p>List Trips</p>
       </div>
     );
   }

@@ -3,7 +3,7 @@
 function TripDetail() {
     return (
       <div>
-        
+        <p>TripDetail</p>
       </div>
     );
   }
