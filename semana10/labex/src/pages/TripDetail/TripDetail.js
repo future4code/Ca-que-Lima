@@ -1,11 +1,12 @@
-
+import { useProtectedPage } from '../../hooks/useProtectedPage'
 
 function TripDetail() {
-    return (
-      <div>
-        <p>TripDetail</p>
-      </div>
-    );
-  }
-  
-  export default TripDetail;
+  useProtectedPage()
+  return (
+    <div>
+      <p>TripDetail</p>
+    </div>
+  )
+}
+
+export default TripDetail

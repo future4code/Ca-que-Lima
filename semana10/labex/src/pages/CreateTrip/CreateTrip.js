@@ -1,11 +1,12 @@
-
+import { useProtectedPage } from '../../hooks/useProtectedPage'
 
 function CreateTrip() {
-    return (
-      <div>
-        <p>CreateTrip</p>
-      </div>
-    );
-  }
-  
-  export default CreateTrip;
+  useProtectedPage()
+  return (
+    <div>
+      <p>CreateTrip</p>
+    </div>
+  )
+}
+
+export default CreateTrip
