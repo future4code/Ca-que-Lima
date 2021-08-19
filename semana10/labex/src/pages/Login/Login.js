@@ -1,21 +1,16 @@
-import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+import useForm from '../../hooks/useForms'
 
 function Login() {
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const { form, onChange } = useForm({ email: '', password: ''})
 
   const history = useHistory()
 
   const login = (e) => {
-    const body = {
-      email: email,
-      password: password
-    }
-
-    axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/login', body)
+    
+    axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/login', form)
       .then(res => {
         localStorage.setItem('token', res.data.token)
         history.push('/admin/trips/list')
@@ -25,26 +20,23 @@ function Login() {
       e.preventDefault()
   }
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value)
-  }
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value)
-  }
-
   return (
     <div>
       <h1>Login</h1>
       <form onSubmit={login}>
         <input
           placeholder='Email'
-          onChange={updateEmail}
+          type='email'
+          onChange={onChange}
+          value={form.email}
+          name='email'
         />
         <input
           placeholder='Senha'
           type='password'
-          onChange={updatePassword}
+          onChange={onChange}
+          value={form.password}
+          name='password'
         />
         <button type='submit'>Enviar</button>
       </form>

@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom"
-import axios from 'axios'
 import { useRequestData } from '../../hooks/useRequestData'
 
 function ListTrip() {

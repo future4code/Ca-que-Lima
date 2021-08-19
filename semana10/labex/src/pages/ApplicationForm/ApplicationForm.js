@@ -1,15 +1,20 @@
 import { useState } from 'react'
 import { useRequestData } from '../../hooks/useRequestData'
+import useForms from '../../hooks/useForms'
 import { CountryDropdown } from 'react-country-region-selector';
 import axios from 'axios';
 
 function ApplicationForm() {
   const [inputTrip, setInputTrip] = useState('default')
-  const [inputName, setInputName] = useState('')
-  const [inputAge, setInputAge] = useState('')
-  const [inputProfession, setInputProfession] = useState('')
   const [inputCountry, setInputCountry] = useState('default')
-  const [inputText, setInputText] = useState('')
+
+
+  const { form, onChange } = useForms({
+    name: '',
+    age: '',
+    applicationText: '',
+    profession: '',
+  })
 
   const [trips] = useRequestData('https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/trips')
   const tripList = trips && trips.trips.map(object => {
@@ -20,36 +25,16 @@ function ApplicationForm() {
     setInputTrip(e.target.value)
   }
 
-  const updateName = (e) => {
-    setInputName(e.target.value)
-  }
-
-  const updateAge = (e) => {
-    setInputAge(e.target.value)
-  }
-
-  const updateProfession = (e) => {
-    setInputProfession(e.target.value)
-  }
-
   const updateCountry = (val) => {
     setInputCountry(val)
   }
 
-  const updateText = (e) => {
-    setInputText(e.target.value)
-  }
-
   const apply = (e) => {
-    const body = {
-      name: inputName,
-      age: inputAge,
-      applicationText: inputText,
-      profession: inputProfession,
+    const body = { ...form, 
       country: inputCountry
     }
 
-    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/trips/${inputTrip}/apply`)
+    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/trips/${inputTrip}/apply`, body)
     .then(res => {
       console.log(res.data)
     }).catch(err => {
@@ -66,15 +51,16 @@ function ApplicationForm() {
           <option value='default' hidden>Selecione uma viagem</option>
           {tripList}
         </select>
-        <input placeholder='Nome' onChange={updateName}/>
-        <input placeholder='Idade' onChange={updateAge}/>
-        <input placeholder='Profissão' onChange={updateProfession}/>
+        <input placeholder='Nome' onChange={onChange} name='name' value={form.name} />
+        <input placeholder='Idade' onChange={onChange} name='age' value={form.age} />
+        <input placeholder='Profissão' onChange={onChange} name='profession' value={form.profession} />
         <CountryDropdown
           defaultOptionLabel='Selecione um país'
           value={inputCountry}
           onChange={(val) => updateCountry(val)}
+          name='country'
         />
-        <textarea placeholder='Por que você deve ser escolhido?' onChange={updateText}/>
+        <textarea placeholder='Por que você deve ser escolhido?' onChange={onChange} name='applicationText' value={form.applicationText} />
         <button onClick={apply}>Enviar</button>
       </form>
     </div>
