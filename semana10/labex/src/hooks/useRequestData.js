@@ -19,7 +19,7 @@ export const useRequestData = (url, headers) => {
         setError(err);
         setIsLoading(false)
       })
-  }, [url])
+  }, [url, headers])
 
   return [data, isLoading, error]
 }

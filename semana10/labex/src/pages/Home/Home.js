@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom"
+import { Container, ContainerButtons } from './styles'
 
 
 function Home() {
@@ -20,11 +21,13 @@ function Home() {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Home</h1>
-      <button onClick={goToListTrips}>Viagens</button>
-      <button onClick={goToLogin}>Login Admin</button>
-    </div>
+      <ContainerButtons>
+        <button onClick={goToListTrips}>Viagens</button>
+        <button onClick={goToLogin}>Login Admin</button>
+      </ContainerButtons>
+    </Container>
   )
 }
 

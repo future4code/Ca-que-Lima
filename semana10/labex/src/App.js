@@ -9,8 +9,15 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
 
     button {
+      padding: 15px;
+      border: none;
+      border-radius: 20px;
+      background-color: lightgrey;
+      font-size: 1.05rem;
+      
       &:hover {
         cursor: pointer;
+        background-color: lightblue;
       }
     }
   }
@@ -19,8 +26,8 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <>
-    <GlobalStyle />
-    <Router />
+      <GlobalStyle />
+      <Router />
     </>
   )
 }
