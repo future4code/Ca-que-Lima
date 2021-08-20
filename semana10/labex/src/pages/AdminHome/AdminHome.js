@@ -1,6 +1,7 @@
 import { useProtectedPage } from '../../hooks/useProtectedPage'
-import { useHistory } from "react-router-dom"
+import { useHistory } from 'react-router-dom'
 import { useRequestData } from '../../hooks/useRequestData'
+import axios from 'axios'
 
 function AdminHome() {
   useProtectedPage()
@@ -26,11 +27,28 @@ function AdminHome() {
     history.push(`/admin/trips/${id}`)
   }
 
+  const deleteTrip = (id) => {
+    const headers = {
+      headers: {
+        auth: localStorage.getItem('token')
+      }
+    }
+    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/trips/${id}`, headers)
+      .then(res => {
+        alert('Viagem deletada com sucesso')
+        window.location.reload()
+      }).catch(err => {
+        console.log(err.response)
+      })
+  }
+
   const tripList = trips && trips.trips.map(trip => {
     return (
-      <div key={trip.id} onClick={() => goToDetails(trip.id)} >
-        <span>{trip.name}</span>
-        <button>Deletar</button>
+      <div key={trip.id}>
+        <div onClick={() => goToDetails(trip.id)} >
+          <span>{trip.name}</span>
+        </div>
+        <button onClick={() => deleteTrip(trip.id)}>Deletar</button>
       </div>
     )
   })
@@ -41,7 +59,12 @@ function AdminHome() {
       <button onClick={goBack}>Voltar</button>
       <button onClick={goToCreateTrip}>Criar Viagem</button>
       <button onClick={logout}>Logout</button>
-      {tripList}
+      {loadingTrips && <p>Carregando...</p>}
+      {!loadingTrips && errorTrips && <p>Ocorreu um erro</p>}
+      {!loadingTrips && trips && trips.trips.length > 0 && tripList}
+      {!loadingTrips && trips && trips.trips.length === 0 && (
+        <p>Nenhuma viagem encontrada!</p>
+      )}
     </div>
   )
 }

@@ -30,16 +30,17 @@ function ApplicationForm() {
   }
 
   const apply = (e) => {
-    const body = { ...form, 
+    const body = {
+      ...form,
       country: inputCountry
     }
 
     axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/trips/${inputTrip}/apply`, body)
-    .then(res => {
-      console.log(res.data)
-    }).catch(err => {
-      console.log(err.response)
-    })
+      .then(res => {
+        console.log(res.data)
+      }).catch(err => {
+        console.log(err.response)
+      })
     e.preventDefault()
   }
 
@@ -52,7 +53,7 @@ function ApplicationForm() {
           {tripList}
         </select>
         <input placeholder='Nome' onChange={onChange} name='name' value={form.name} />
-        <input placeholder='Idade' onChange={onChange} name='age' value={form.age} />
+        <input placeholder='Idade (Deve ser maior de idade)' onChange={onChange} name='age' value={form.age} type='number' min='18' max='60' />
         <input placeholder='Profissão' onChange={onChange} name='profession' value={form.profession} />
         <CountryDropdown
           defaultOptionLabel='Selecione um país'

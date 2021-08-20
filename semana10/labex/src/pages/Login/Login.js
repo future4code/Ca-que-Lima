@@ -4,12 +4,12 @@ import useForm from '../../hooks/useForms'
 
 function Login() {
 
-  const { form, onChange } = useForm({ email: '', password: ''})
+  const { form, onChange } = useForm({ email: '', password: '' })
 
   const history = useHistory()
 
   const login = (e) => {
-    
+
     axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/login', form)
       .then(res => {
         localStorage.setItem('token', res.data.token)
@@ -17,7 +17,7 @@ function Login() {
       }).catch(err => {
         alert(err.response.data.message)
       })
-      e.preventDefault()
+    e.preventDefault()
   }
 
   return (
@@ -30,6 +30,7 @@ function Login() {
           onChange={onChange}
           value={form.email}
           name='email'
+          required
         />
         <input
           placeholder='Senha'
@@ -37,6 +38,7 @@ function Login() {
           onChange={onChange}
           value={form.password}
           name='password'
+          required
         />
         <button type='submit'>Enviar</button>
       </form>

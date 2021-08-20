@@ -14,15 +14,21 @@ function ListTrip() {
   const goBack = () => {
     history.goBack()
   }
-  
+
+
+
   const tripList = trips && trips.trips.map(trip => {
+    const data = new Date(trip.date)
+    const dataFormatada = data.toLocaleDateString("pt-BR", {
+      timeZone: "UTC",
+    })
     return (
       <div key={trip.id}>
         <p>Nome:</p><span>{trip.name}</span>
         <p>Descrição:</p><span>{trip.description}</span>
         <p>Planeta:</p><span>{trip.planet}</span>
         <p>Duração:</p><span>{trip.durationInDays}</span>
-        <p>Data:</p><span>{trip.date}</span>
+        <p>Data:</p><span>{dataFormatada}</span>
       </div>
     )
   })
