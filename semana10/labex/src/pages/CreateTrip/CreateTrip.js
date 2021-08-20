@@ -2,6 +2,8 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForms'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
+import { Container, ContainerButtons, Form, Input } from './styles'
+import swal from 'sweetalert2'
 
 function CreateTrip() {
   useProtectedPage()
@@ -30,9 +32,16 @@ function CreateTrip() {
 
     axios.post(url, form, headers)
       .then(res => {
-        alert('Viagem criada com sucesso')
+        swal.fire('Tudo certo!', 'Viagem criada com sucesso', 'success')
+        goBack()
       }).catch(err => {
-        console.log(err.response)
+        swal.fire({
+          icon: 'error',
+          title: 'OOOPS...',
+          text: 'Algo deu errado... tente novamente mais tarde',
+          showConfirmButton: true,
+          confirmButtonColor: '#D73743'
+        })
       })
 
     e.preventDefault()
@@ -40,18 +49,20 @@ function CreateTrip() {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Criar Viagem</h1>
-      <form onSubmit={sendTrip}>
-        <input name='name' value={form.name} placeholder='Nome' required onChange={onChange} />
-        <input name='planet' value={form.planet} placeholder='Planeta' required onChange={onChange} />
-        <input name='date' value={form.date} placeholder='Data' required type='date' onChange={onChange} />
-        <input name='description' value={form.description} placeholder='Descrição' required onChange={onChange} />
-        <input name='durationInDays' value={form.durationInDays} placeholder='Duração em dias' required type='number' onChange={onChange} />
-        <button type='submit'>Criar</button>
-      </form>
+      <Form onSubmit={sendTrip}>
+        <Input name='name' value={form.name} placeholder='Nome' required onChange={onChange} />
+        <Input name='planet' value={form.planet} placeholder='Planeta' required onChange={onChange} />
+        <Input name='date' value={form.date} placeholder='Data' required type='date' onChange={onChange} />
+        <Input name='description' value={form.description} placeholder='Descrição' required onChange={onChange} />
+        <Input name='durationInDays' value={form.durationInDays} placeholder='Duração em dias' required type='number' onChange={onChange} />
+        <ContainerButtons>
+          <button type='submit'>Criar</button>
+        </ContainerButtons>
+      </Form>
       <button onClick={goBack}>Voltar</button>
-    </div>
+    </Container>
   )
 }
 

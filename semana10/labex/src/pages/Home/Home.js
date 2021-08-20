@@ -22,7 +22,7 @@ function Home() {
 
   return (
     <Container>
-      <h1>Home</h1>
+      <h1>LabeX</h1>
       <ContainerButtons>
         <button onClick={goToListTrips}>Viagens</button>
         <button onClick={goToLogin}>Login Admin</button>

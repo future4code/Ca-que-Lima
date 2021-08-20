@@ -1,7 +1,10 @@
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { useHistory } from 'react-router-dom'
 import { useRequestData } from '../../hooks/useRequestData'
+import { CardTrip, Container, ContainerButtons } from './styles'
+import { BsTrash } from 'react-icons/bs'
 import axios from 'axios'
+import swal from 'sweetalert2'
 
 function AdminHome() {
   useProtectedPage()
@@ -33,39 +36,62 @@ function AdminHome() {
         auth: localStorage.getItem('token')
       }
     }
-    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/trips/${id}`, headers)
-      .then(res => {
-        alert('Viagem deletada com sucesso')
-        window.location.reload()
-      }).catch(err => {
-        console.log(err.response)
-      })
+    swal.fire({
+      title: 'Tem certeza?',
+      text: "Não será possível reverter isso!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, apague!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/caiquelima/trips/${id}`, headers)
+          .then(res => {
+            window.location.reload()
+            swal.fire('Tudo certo!', 'Viagem deletada com sucesso', 'success')
+          }).catch(err => {
+            swal.fire({
+              icon: 'error',
+              title: 'OOOPS...',
+              text: 'Algo deu errado... tente novamente mais tarde',
+              showConfirmButton: true,
+              confirmButtonColor: '#D73743'
+            })
+          })
+      }
+
+    })
   }
 
   const tripList = trips && trips.trips.map(trip => {
     return (
-      <div key={trip.id}>
+      <CardTrip key={trip.id}>
         <div onClick={() => goToDetails(trip.id)} >
           <span>{trip.name}</span>
         </div>
-        <button onClick={() => deleteTrip(trip.id)}>Deletar</button>
-      </div>
+        <BsTrash onClick={() => deleteTrip(trip.id)} />
+      </CardTrip>
     )
   })
 
   return (
-    <div>
-      <h1>AdminHome</h1>
-      <button onClick={goBack}>Voltar</button>
-      <button onClick={goToCreateTrip}>Criar Viagem</button>
-      <button onClick={logout}>Logout</button>
+    <Container>
+      <h1>Painel Administrativo</h1>
+      <ContainerButtons>
+        <button onClick={goBack}>Voltar</button>
+        <button onClick={goToCreateTrip}>Criar Viagem</button>
+        <button onClick={logout}>Logout</button>
+      </ContainerButtons>
+
       {loadingTrips && <p>Carregando...</p>}
       {!loadingTrips && errorTrips && <p>Ocorreu um erro</p>}
       {!loadingTrips && trips && trips.trips.length > 0 && tripList}
       {!loadingTrips && trips && trips.trips.length === 0 && (
         <p>Nenhuma viagem encontrada!</p>
       )}
-    </div>
+    </Container>
   )
 }
 

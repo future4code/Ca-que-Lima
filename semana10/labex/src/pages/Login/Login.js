@@ -1,12 +1,18 @@
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import useForm from '../../hooks/useForms'
+import swal from 'sweetalert2'
+import { Container, ContainerButtons, Form, Input } from './styles'
 
 function Login() {
 
   const { form, onChange } = useForm({ email: '', password: '' })
 
   const history = useHistory()
+
+  const goBack = () => {
+    history.goBack()
+  }
 
   const login = (e) => {
 
@@ -15,16 +21,22 @@ function Login() {
         localStorage.setItem('token', res.data.token)
         history.push('/admin/trips/list')
       }).catch(err => {
-        alert(err.response.data.message)
+        swal.fire({
+          icon: 'error',
+          title: 'OOOPS...',
+          text: err.response.data.message,
+          showConfirmButton: true,
+          confirmButtonColor: '#D73743'
+        })
       })
     e.preventDefault()
   }
 
   return (
-    <div>
+    <Container>
       <h1>Login</h1>
-      <form onSubmit={login}>
-        <input
+      <Form onSubmit={login}>
+        <Input
           placeholder='Email'
           type='email'
           onChange={onChange}
@@ -32,7 +44,7 @@ function Login() {
           name='email'
           required
         />
-        <input
+        <Input
           placeholder='Senha'
           type='password'
           onChange={onChange}
@@ -40,9 +52,12 @@ function Login() {
           name='password'
           required
         />
-        <button type='submit'>Enviar</button>
-      </form>
-    </div>
+        <ContainerButtons>
+          <button type='submit'>Entrar</button>
+        </ContainerButtons>
+      </Form>
+      <button onClick={goBack}>Voltar</button>
+    </Container>
   )
 }
 

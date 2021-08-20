@@ -21,7 +21,6 @@ export const CardTrip = styled.div`
     margin: 10px 0;
     width: 550px;
     padding: 15px;
-    /* border: 1px solid black; */
     border-radius: 5px;
     box-shadow: 3px 3px 5px 3px lightgrey;
 

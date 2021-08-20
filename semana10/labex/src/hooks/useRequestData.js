@@ -5,21 +5,23 @@ export const useRequestData = (url, headers) => {
   const [data, setData] = useState()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [mounted, setMounted] = useState(true)
 
   useEffect(() => {
     setIsLoading(true)
     axios
       .get(url, headers)
       .then((res) => {
-        setData(res.data)
-        setIsLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
+        if(mounted) {
+          setData(res.data)
+          setIsLoading(false)
+          setMounted(false)
+        }
+      }).catch((err) => {
         setError(err);
         setIsLoading(false)
       })
-  }, [url, headers])
+  }, [])
 
   return [data, isLoading, error]
 }
