@@ -1,22 +1,12 @@
 import Router from "./routes/Router"
-import { createGlobalStyle } from "styled-components"
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    font-family: 'Nunito', sans-serif;;
-  }
-`
-
+import ThemeProvider from "@material-ui/styles/ThemeProvider"
+import theme from "./constants/theme"
 
 function App() {
   return (
-    <>
-      <GlobalStyle />
+    <ThemeProvider theme={theme}>
       <Router />
-    </>
+    </ThemeProvider>
   )
 }
 
