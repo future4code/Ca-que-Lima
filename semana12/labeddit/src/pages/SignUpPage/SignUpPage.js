@@ -1,12 +1,17 @@
 import React from 'react'
+import { ScreenContainer, SignUpFormContainer } from './styles'
+import SignUpForm from './SignUpForm'
 import { useUnprotectedPage } from '../../hooks/useUnprotectedPage'
 
-export default function SingUpPage() {
+export default function LoginPage() {
     useUnprotectedPage()
 
     return (
-        <div>
+        <ScreenContainer>
             <h1>Cadastro</h1>
-        </div>
+            <SignUpFormContainer>
+                <SignUpForm />
+            </SignUpFormContainer>
+        </ScreenContainer>
     )
 }

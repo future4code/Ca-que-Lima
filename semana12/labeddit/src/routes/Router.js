@@ -25,7 +25,7 @@ export default function Router() {
                     <PostPage />
                 </Route>
 
-                <Route exact path={'/sign-up'}>
+                <Route exact path={'/cadastro'}>
                     <SignUpPage />
                 </Route>
 
