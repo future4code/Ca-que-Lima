@@ -1,14 +1,15 @@
 import { useLayoutEffect } from "react"
 import { useHistory } from "react-router-dom"
+import { goToHome } from "../routes/coordinator"
 
- export const useProtectedPage = () => {
+ export const useUnprotectedPage = () => {
     const history = useHistory()
 
     useLayoutEffect(() => {
         const token = localStorage.getItem('tokenLabEddit')
 
-        if (token === null) {
-            history.push('/login')
+        if (token) {
+            goToHome(history)
         }
     }, [history])
 }
