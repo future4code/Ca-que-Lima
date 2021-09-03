@@ -21,7 +21,7 @@ export default function Router() {
                     <FeedPage />
                 </Route>
 
-                <Route exact path={'/details/:id'}>
+                <Route exact path={'/detalhes/:id'}>
                     <PostPage />
                 </Route>
 
