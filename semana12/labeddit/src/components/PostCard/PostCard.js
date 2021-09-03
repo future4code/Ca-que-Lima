@@ -30,8 +30,6 @@ export default function PostCard({ username, body, voteSum, commentCount, id }) 
 
   const [votes, setVotes] = useState(voteSum)
 
-  console.log(votes)
-
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>

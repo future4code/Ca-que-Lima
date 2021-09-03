@@ -18,8 +18,6 @@ export default function FeedPage() {
 
     const [posts, loadingPosts, errorPosts] = useRequestData(`${BASE_URL}/posts`, headers)
 
-    console.log(posts && posts[0])
-
     const postList = posts?.map(post => {
         return (
             <PostCard
@@ -36,8 +34,12 @@ export default function FeedPage() {
 
     return (
         <ScreenContainer>
-            {/* <PostCard /> */}
-            {postList}
+            {loadingPosts && <p>Carregando...</p>}
+            {!loadingPosts && errorPosts && <p>Ocorreu um erro</p>}
+            {!loadingPosts && posts && posts.length > 0 && postList}
+            {!loadingPosts && posts && posts.length === 0 && (
+                <p>Nenhum post encontrado!</p>
+            )}
         </ScreenContainer>
     )
 }
