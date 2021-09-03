@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -9,6 +9,7 @@ import UpVotesCounter from '../UpVotesCounter/UpvotesCounter'
 import { goToDetail } from '../../routes/coordinator'
 import { useHistory } from 'react-router-dom'
 import CommentCounter from '../CommentCounter/CommentCounter'
+import GlobalContext from '../../global/GlobalContext'
 
 const useStyles = makeStyles({
   root: {
@@ -24,11 +25,24 @@ const useStyles = makeStyles({
 })
 
 export default function PostCard({ username, body, voteSum, commentCount, id }) {
+
+  const { setters } = useContext(GlobalContext)
+
   const classes = useStyles()
 
   const history = useHistory()
 
   const [votes, setVotes] = useState(voteSum)
+
+  const handleClick = () => {
+    goToDetail(history, id)
+    setters.setPostBeingCommented({
+      username: username,
+      body: body,
+      voteSum: voteSum,
+      commentCount: commentCount
+    })
+  }
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -41,9 +55,9 @@ export default function PostCard({ username, body, voteSum, commentCount, id }) 
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => goToDetail(history, id)}>Ver Comentários</Button>
+        <Button size="small" onClick={handleClick}>Ver Comentários</Button>
         <UpVotesCounter upVotes={votes ? votes : 0} setVotes={setVotes} id={id} />
-        <CommentCounter commentCount={commentCount}/>
+        <CommentCounter commentCount={commentCount} />
       </CardActions>
     </Card>
   )
