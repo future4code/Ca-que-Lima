@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom'
 import CommentCounter from '../CommentCounter/CommentCounter'
 import GlobalContext from '../../global/GlobalContext'
 
+
 const useStyles = makeStyles({
   root: {
     width: 500,
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function PostCard({ username, body, voteSum, commentCount, id }) {
+export default function PostCard({ username, body, voteSum, commentCount, id, userVote }) {
 
   const { setters } = useContext(GlobalContext)
 
@@ -56,7 +57,7 @@ export default function PostCard({ username, body, voteSum, commentCount, id }) 
       </CardContent>
       <CardActions>
         <Button size="small" onClick={handleClick}>Ver Comentários</Button>
-        <UpVotesCounter upVotes={votes ? votes : 0} setVotes={setVotes} id={id} />
+        <UpVotesCounter upVotes={votes ? votes : 0} setVotes={setVotes} id={id} userVote={userVote} />
         <CommentCounter commentCount={commentCount} />
       </CardActions>
     </Card>

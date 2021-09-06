@@ -27,6 +27,7 @@ export default function FeedPage() {
                 body={post.body}
                 voteSum={post.voteSum}
                 commentCount={post.commentCount}
+                userVote={post.userVote}
             />
         )
 
