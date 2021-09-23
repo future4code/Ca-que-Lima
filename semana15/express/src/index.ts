@@ -88,7 +88,7 @@ app.put('/countries/:id', (req: Request, res: Response) => {
             throw new Error('Invalid ID')
         }
 
-        if (!req.body.length) {
+        if (!newName && !newCapital) {
             res.statusCode = 400
             throw new Error('Please include body on request')
         }
