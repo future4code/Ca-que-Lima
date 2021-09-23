@@ -102,7 +102,7 @@ app.put('/countries/:id', (req: Request, res: Response) => {
             if (newCapital) {
                 countries[Number(req.params.id)].capital = newCapital
             }
-            res.status(200).send('País atualizado com sucesso')
+            res.status(200).send('Success')
         } else {
             res.statusCode = 404
             throw new Error('Country not found')
