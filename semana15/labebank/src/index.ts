@@ -49,5 +49,34 @@ app.get("/users", (req: Request, res: Response) => {
 })
 
 app.post("/users", (req: Request, res: Response) => {
-    res.status(200).send(users)
+    try {
+        const { name, cpf, birthDate } = req.body
+
+        if (name && cpf && birthDate) {
+
+            const cpfExists: User | undefined = users.find(user => cpf === user.cpf)
+
+            if (cpfExists) {
+                res.statusCode = 403
+                throw new Error('CPF já cadastrado')
+            }
+
+            const newUser: User = {
+                name,
+                cpf,
+                birthDate,
+                balance: 0,
+                transactions: []
+            }
+        
+            users.push(newUser)
+            res.status(200).send('Usuário cadastrado com sucesso!')
+        } else {
+            res.statusCode = 400
+            throw new Error('Por favor preencha todos os campos')
+        }
+
+    } catch (error: any) {
+        res.send(error.message)
+    }
 })
