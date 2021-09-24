@@ -15,7 +15,8 @@ type User = {
 
 type Transaction = {
     value: number,
-    date: string
+    date: string,
+    description: string
 }
 
 const users: User[] = [
@@ -27,7 +28,8 @@ const users: User[] = [
         transactions: [
             {
                 value: -32,
-                date: "2021/09/23"
+                date: "2021/09/23",
+                description: "Compra na padaria"
             }
         ]
     },
