@@ -62,7 +62,7 @@ app.get("/users/:cpf", (req: Request, res: Response) => {
             res.statusCode = 400
             throw new Error('CPF inválido')
         }
-    } catch(error: any) {
+    } catch (error: any) {
         res.send(error.message)
     }
 })
@@ -97,7 +97,7 @@ app.post("/users", (req: Request, res: Response) => {
                 balance: 0,
                 transactions: []
             }
-        
+
             users.push(newUser)
             res.status(200).send('Usuário cadastrado com sucesso!')
         } else {
@@ -105,6 +105,33 @@ app.post("/users", (req: Request, res: Response) => {
             throw new Error('Por favor preencha todos os campos')
         }
 
+    } catch (error: any) {
+        res.send(error.message)
+    }
+})
+
+app.put("/users", (req: Request, res: Response) => {
+    try {
+        const { name, cpf, value } = req.body
+        const user: User | undefined = users.find(user => Number(cpf) === user.cpf)
+
+        if (!user) {
+            res.statusCode = 400
+            throw new Error('CPF inválido')
+        }
+
+        if (user.name.toLowerCase() !== name.toLowerCase()) {
+            res.statusCode = 400
+            throw new Error('Nome inválido')
+        }
+
+        users.map(user => {
+            if (user.cpf === Number(cpf)) {
+                user.balance += Number(value)
+                res.status(200).send(`Seu novo saldo é de: R$${user.balance}`)
+            }
+        })
+        
     } catch (error: any) {
         res.send(error.message)
     }
