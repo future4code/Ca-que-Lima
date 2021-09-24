@@ -22,19 +22,19 @@ const users: User[] = [
     {
         name: "Caíque",
         cpf: 11122233345,
-        birthDate: "20/05/1994",
+        birthDate: "1994/05/20",
         balance: 503,
         transactions: [
             {
                 value: -32,
-                date: "23/09/2021"
+                date: "2021/09/23"
             }
         ]
     },
     {
         name: "Naiara",
         cpf: 12312312345,
-        birthDate: "28/01/1992",
+        birthDate: "1992/01/28",
         balance: 329,
         transactions: []
     }
@@ -54,7 +54,17 @@ app.post("/users", (req: Request, res: Response) => {
 
         if (name && cpf && birthDate) {
 
+            function checkAge(birthDate: string): number {
+                const today = new Date()
+                return Math.floor(Math.ceil(Math.abs((new Date(birthDate)).getTime() - today.getTime()) / (1000 * 3600 * 24)) / 365.25)
+            }
+
             const cpfExists: User | undefined = users.find(user => cpf === user.cpf)
+
+            if (checkAge(birthDate) < 18) {
+                res.statusCode = 403
+                throw new Error('Infelizmente você ainda nao pode ser nosso cliente. Necessário ter pelo menos 18 anos.')
+            }
 
             if (cpfExists) {
                 res.statusCode = 403
