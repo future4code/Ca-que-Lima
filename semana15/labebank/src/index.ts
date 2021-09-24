@@ -1,46 +1,11 @@
-import express, { Response, Request } from "express";
+import express, { Response, Request } from "express"
 import cors from "cors"
+import { User } from "./types"
+import { users } from "./data"
 
 const app = express()
 app.use(express.json())
 app.use(cors())
-
-type User = {
-    name: string,
-    cpf: number,
-    birthDate: string,
-    balance: number,
-    transactions: Transaction[]
-}
-
-type Transaction = {
-    value: number,
-    date: string,
-    description: string
-}
-
-const users: User[] = [
-    {
-        name: "Caíque",
-        cpf: 11122233345,
-        birthDate: "1994/05/20",
-        balance: 503.65,
-        transactions: [
-            {
-                value: -32.00,
-                date: "2021/09/23",
-                description: "Compra na padaria"
-            }
-        ]
-    },
-    {
-        name: "Naiara",
-        cpf: 12312312345,
-        birthDate: "1992/01/28",
-        balance: 329.87,
-        transactions: []
-    }
-]
 
 app.listen(3003, () => {
     console.log('Server running on port 3003')
