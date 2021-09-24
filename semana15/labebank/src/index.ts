@@ -57,7 +57,7 @@ app.get("/users/:cpf", (req: Request, res: Response) => {
         const user: User | undefined = users.find(user => cpf === user.cpf)
 
         if (user) {
-            res.status(200).send(`O saldo de de ${user.name} é: R$${user.balance}`)
+            res.status(200).send(`O saldo de ${user.name} é: R$${user.balance}`)
         } else {
             res.statusCode = 400
             throw new Error('CPF inválido')
