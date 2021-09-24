@@ -93,6 +93,11 @@ app.put("/users", (req: Request, res: Response) => {
         users.map(user => {
             if (user.cpf === Number(cpf)) {
                 user.balance += Number(value)
+                user.transactions = [...user.transactions, {
+                    value: Number(value),
+                    date: new Date().toISOString().slice(0, 10),
+                    description: 'Depósito de Dinheiro'
+                }]
                 res.status(200).send(`Seu novo saldo é de: R$${user.balance}`)
             }
         })
