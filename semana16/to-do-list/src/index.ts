@@ -1,4 +1,4 @@
-import express, { Express } from 'express'
+import express, { Express, Request, Response } from 'express'
 import cors from 'cors'
 import { AddressInfo } from 'net'
 import { connection } from './connection'
@@ -8,7 +8,14 @@ const app: Express = express()
 app.use(express.json())
 app.use(cors())
 
-
+app.get("/users", async (req: Request, res: Response): Promise<any> => {
+    try {
+        const users = await connection("ToDoListUser")
+        res.status(200).send(users)
+    } catch (error: any) {
+        res.send(error.message || error.sqlMessage)
+    }
+})
 
 
 
