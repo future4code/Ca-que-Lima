@@ -17,7 +17,15 @@ app.get("/users", async (req: Request, res: Response): Promise<any> => {
     }
 })
 
-
+app.get("/users/:id", async (req: Request, res: Response): Promise<any> => {
+    try {
+        const id: number = Number(req.params.id)
+        const users = await connection("ToDoListUser").where({ id: id })
+        res.status(200).send(users)
+    } catch (error: any) {
+        res.send(error.message || error.sqlMessage)
+    }
+})
 
 
 
