@@ -8,16 +8,16 @@ const app: Express = express()
 app.use(express.json())
 app.use(cors())
 
-app.get("/users", async (req: Request, res: Response): Promise<any> => {
+app.get("/user/all", async (req: Request, res: Response): Promise<any> => {
     try {
-        const users = await connection("ToDoListUser")
-        res.status(200).send(users)
+        const users = await connection("ToDoListUser").select("id", "nickname").orderBy("id")
+        res.status(200).send({users: users})
     } catch (error: any) {
         res.send(error.sqlMessage || error.message)
     }
 })
 
-app.get("/users/:id", async (req: Request, res: Response): Promise<any> => {
+app.get("/user/:id", async (req: Request, res: Response): Promise<any> => {
     const id: number = Number(req.params.id)
     try {
         const user = await connection("ToDoListUser").where({ id: id })
@@ -27,7 +27,7 @@ app.get("/users/:id", async (req: Request, res: Response): Promise<any> => {
     }
 })
 
-app.post("/users", async (req: Request, res: Response): Promise<any> => {
+app.post("/user", async (req: Request, res: Response): Promise<any> => {
     let errorCode = 400
     const { name, nickname, email } = req.body
 
@@ -43,7 +43,7 @@ app.post("/users", async (req: Request, res: Response): Promise<any> => {
     }
 })
 
-app.put("/users/edit/:id", async (req: Request, res: Response): Promise<any> => {
+app.put("/user/edit/:id", async (req: Request, res: Response): Promise<any> => {
     let errorCode = 400
     const id: number = Number(req.params.id)
     const { name, nickname } = req.body
@@ -65,7 +65,6 @@ app.put("/users/edit/:id", async (req: Request, res: Response): Promise<any> => 
     }
 })
 
-
 app.get("/task", async (req: Request, res: Response): Promise<any> => {
     try {
         const tasks = await connection("ToDoListTask")
@@ -74,7 +73,6 @@ app.get("/task", async (req: Request, res: Response): Promise<any> => {
         res.send(error.sqlMessage || error.message)
     }
 })
-
 
 app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
     let errorCode = 400
@@ -105,7 +103,6 @@ app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
         res.status(errorCode).send(error.sqlMessage || error.message)
     }
 })
-
 
 app.post("/task", async (req: Request, res: Response): Promise<any> => {
     let errorCode = 400
