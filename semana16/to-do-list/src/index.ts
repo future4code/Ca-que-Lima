@@ -27,16 +27,20 @@ app.get("/users/:id", async (req: Request, res: Response): Promise<any> => {
     }
 })
 
-
-
-
-
-
-
-
-
-
-
+app.post("/users", async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { name, nickname, email } = req.body
+        if (!name || !nickname || !email) {
+            res.statusCode = 400
+            throw new Error('Por favor preencha todos os campos')
+        } else {
+            await connection("ToDoListUser").insert({ name: name, nickname: nickname, email: email})
+            res.status(200).send('Usuário inserido com sucesso')
+        }
+    } catch (error: any) {
+        res.send(error.message || error.sqlMessage)
+    }
+})
 
 
 
