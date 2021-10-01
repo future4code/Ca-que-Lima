@@ -65,6 +65,46 @@ app.put("/users/edit/:id", async (req: Request, res: Response): Promise<any> => 
     }
 })
 
+
+app.get("/task", async (req: Request, res: Response): Promise<any> => {
+    try {
+        const tasks = await connection("ToDoListTask")
+        res.status(200).send(tasks)
+    } catch (error: any) {
+        res.send(error.sqlMessage || error.message)
+    }
+})
+
+
+app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
+    let errorCode = 400
+    const id: number = Number(req.params.id)
+    try {
+        const taskIsValid = await connection("ToDoListTask").where({ id: id })
+
+        if (taskIsValid.length) {
+            const task = await connection("ToDoListTask")
+                .join("ToDoListUser", "creator_user_id", "=", "ToDoListUser.id")
+                .select(
+                    "ToDoListTask.id",
+                    "title",
+                    "description",
+                    "status",
+                    "limit_date as limitDate",
+                    "creator_user_id as creatorUserId",
+                    "nickname as creatorUserNickname"
+                )
+                .from("ToDoListTask").where({ "ToDoListTask.id": id })
+            res.status(200).send(task[0])
+        } else {
+            throw new Error('ID inválido')
+        }
+    } catch (error: any) {
+        res.status(errorCode).send(error.sqlMessage || error.message)
+    }
+})
+
+
 app.post("/task", async (req: Request, res: Response): Promise<any> => {
     let errorCode = 400
     const { title, description, limitDate, creatorUserId } = req.body
@@ -93,10 +133,6 @@ app.post("/task", async (req: Request, res: Response): Promise<any> => {
         res.status(errorCode).send(error.sqlMessage || error.message)
     }
 })
-
-
-
-
 
 const server = app.listen(process.env.PORT || 3003, () => {
     if (server) {
