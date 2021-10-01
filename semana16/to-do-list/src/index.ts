@@ -29,8 +29,9 @@ app.get("/users/:id", async (req: Request, res: Response): Promise<any> => {
 
 app.post("/users", async (req: Request, res: Response): Promise<any> => {
     let errorCode = 400
+    const { name, nickname, email } = req.body
+
     try {
-        const { name, nickname, email } = req.body
         if (!name || !nickname || !email) {
             throw new Error('Por favor preencha todos os campos')
         } else {
@@ -63,6 +64,37 @@ app.put("/users/edit/:id", async (req: Request, res: Response): Promise<any> => 
         res.status(errorCode).send(error.sqlMessage || error.message)
     }
 })
+
+app.post("/task", async (req: Request, res: Response): Promise<any> => {
+    let errorCode = 400
+    const { title, description, limitDate, creatorUserId } = req.body
+    function formatDate(date: string): string {
+        const day = date.split("/")[0];
+        const month = date.split("/")[1];
+        const year = date.split("/")[2];
+
+        return year + '-' + ("0" + month).slice(-2) + '-' + ("0" + day).slice(-2);
+    }
+    const formattedDate: string = formatDate(limitDate)
+
+    try {
+        if (!title || !description || !limitDate || !creatorUserId) {
+            throw new Error('Por favor preencha todos os campos')
+        } else {
+            await connection("ToDoListTask").insert({
+                title: title,
+                description: description,
+                limit_date: formattedDate,
+                creator_user_id: Number(creatorUserId)
+            })
+            res.status(200).send('Tarefa inserida com sucesso')
+        }
+    } catch (error: any) {
+        res.status(errorCode).send(error.sqlMessage || error.message)
+    }
+})
+
+
 
 
 
