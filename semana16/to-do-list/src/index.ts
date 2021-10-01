@@ -95,7 +95,9 @@ app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
                     "nickname as creatorUserNickname"
                 )
                 .from("ToDoListTask").where({ "ToDoListTask.id": id })
-            res.status(200).send(task[0])
+            const newDate: string = task[0].limitDate.toISOString().slice(0, 10).split('-')
+            const formattedDate: string = newDate[2] + '/' + newDate[1] + '/' + newDate[0]
+            res.status(200).send({ ...task[0], limitDate: formattedDate })
         } else {
             throw new Error('ID inválido')
         }
