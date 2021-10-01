@@ -11,24 +11,30 @@ app.use(cors())
 app.get("/user/all", async (req: Request, res: Response): Promise<any> => {
     try {
         const users = await connection("ToDoListUser").select("id", "nickname").orderBy("id")
-        res.status(200).send({users: users})
+        res.status(200).send({ users: users })
     } catch (error: any) {
         res.send(error.sqlMessage || error.message)
     }
 })
 
 app.get("/user/:id", async (req: Request, res: Response): Promise<any> => {
+    let errorCode: number = 400
     const id: number = Number(req.params.id)
+
     try {
-        const user = await connection("ToDoListUser").where({ id: id })
-        res.status(200).send({ id: user[0].id, nickname: user[0].nickname })
+        const user = await connection("ToDoListUser").select("id", "nickname").where({ id: id })
+        if (user.length) {
+            res.status(200).send(user[0])
+        } else {
+            throw new Error('Usuário não encontrado')
+        }
     } catch (error: any) {
-        res.send(error.sqlMessage || error.message)
+        res.status(errorCode).send(error.sqlMessage || error.message)
     }
 })
 
 app.post("/user", async (req: Request, res: Response): Promise<any> => {
-    let errorCode = 400
+    let errorCode: number = 400
     const { name, nickname, email } = req.body
 
     try {
@@ -44,38 +50,43 @@ app.post("/user", async (req: Request, res: Response): Promise<any> => {
 })
 
 app.put("/user/edit/:id", async (req: Request, res: Response): Promise<any> => {
-    let errorCode = 400
+    let errorCode: number = 400
     const id: number = Number(req.params.id)
     const { name, nickname } = req.body
 
     try {
-        if (name === "" || nickname === "") {
-            throw new Error('Por favor cheque os campos')
+        const user = await connection("ToDoListUser").where({ id: id })
+        if (user.length) {
+            if (name === "" || nickname === "") {
+                throw new Error('Por favor cheque os campos')
+            } else {
+                if (name) {
+                    await connection("ToDoListUser").where({ id: id }).update({ name: name })
+                }
+                if (nickname) {
+                    await connection("ToDoListUser").where({ id: id }).update({ nickname: nickname })
+                }
+                res.status(200).send('Usuário atualizado com sucesso')
+            }
         } else {
-            if (name) {
-                await connection("ToDoListUser").where({ id: id }).update({ name: name })
-            }
-            if (nickname) {
-                await connection("ToDoListUser").where({ id: id }).update({ nickname: nickname })
-            }
-            res.status(200).send('Usuário atualizado com sucesso')
+            throw new Error('Usuário não encontrado')
         }
     } catch (error: any) {
         res.status(errorCode).send(error.sqlMessage || error.message)
     }
 })
 
-app.get("/task", async (req: Request, res: Response): Promise<any> => {
-    try {
-        const tasks = await connection("ToDoListTask")
-        res.status(200).send(tasks)
-    } catch (error: any) {
-        res.send(error.sqlMessage || error.message)
-    }
-})
+// app.get("/task", async (req: Request, res: Response): Promise<any> => {
+//     try {
+//         const tasks = await connection("ToDoListTask")
+//         res.status(200).send(tasks)
+//     } catch (error: any) {
+//         res.send(error.sqlMessage || error.message)
+//     }
+// })
 
 app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
-    let errorCode = 400
+    let errorCode: number = 400
     const id: number = Number(req.params.id)
     try {
         const taskIsValid = await connection("ToDoListTask").where({ id: id })
@@ -98,6 +109,44 @@ app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
             res.status(200).send({ ...task[0], limitDate: formattedDate })
         } else {
             throw new Error('ID inválido')
+        }
+    } catch (error: any) {
+        res.status(errorCode).send(error.sqlMessage || error.message)
+    }
+})
+
+app.get("/task/", async (req: Request, res: Response): Promise<any> => {
+    let errorCode: number = 400
+    const id: number = Number(req.query.creatorUserId)
+    try {
+        if (!id) {
+            throw new Error('Por favor, insira o ID')
+        }
+
+        const user = await connection("ToDoListUser").where({ id: id })
+
+        if (user.length) {
+            const tasks = await connection("ToDoListTask")
+                .join("ToDoListUser", "creator_user_id", "=", "ToDoListUser.id")
+                .select(
+                    "ToDoListTask.id",
+                    "title",
+                    "description",
+                    "status",
+                    "limit_date as limitDate",
+                    "creator_user_id as creatorUserId",
+                    "nickname as creatorUserNickname"
+                )
+                .from("ToDoListTask").where({ "ToDoListUser.id": id })
+
+            const newArray = tasks.map(task => {
+                const newDate: string = task.limitDate.toISOString().slice(0, 10).split('-')
+                const formattedDate: string = newDate[2] + '/' + newDate[1] + '/' + newDate[0]
+                return { ...task, limitDate: formattedDate }
+            })
+            res.status(200).send({ tasks: newArray })
+        } else {
+            throw new Error('Usuário não encontrado')
         }
     } catch (error: any) {
         res.status(errorCode).send(error.sqlMessage || error.message)
