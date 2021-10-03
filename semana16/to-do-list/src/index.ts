@@ -1,7 +1,6 @@
-import express, { Express, Request, Response } from 'express'
+import express, { Express } from 'express'
 import cors from 'cors'
 import { AddressInfo } from 'net'
-import { connection } from './connection'
 import getAllUsers from './endpoints/getAllUsers'
 import getUserById from './endpoints/getUserById'
 import createUser from './endpoints/createUser'
