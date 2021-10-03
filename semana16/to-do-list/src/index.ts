@@ -6,6 +6,7 @@ import getAllUsers from './endpoints/getAllUsers'
 import getUserById from './endpoints/getUserById'
 import createUser from './endpoints/createUser'
 import editUserById from './endpoints/editUserById'
+import getAllTasks from './endpoints/getAllTasks'
 
 const app: Express = express()
 
@@ -20,14 +21,8 @@ app.post("/user", createUser)
 
 app.put("/user/edit/:id", editUserById)
 
-app.get("/task/all", async (req: Request, res: Response): Promise<any> => {
-    try {
-        const tasks = await connection("ToDoListTask")
-        res.status(200).send(tasks)
-    } catch (error: any) {
-        res.send(error.sqlMessage || error.message)
-    }
-})
+// endpoint apenas para meu uso, para checar todas as tasks
+app.get("/task/all", getAllTasks)
 
 app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
     let errorCode: number = 400

@@ -3,10 +3,18 @@ export type User = {
     nickname: string
 }
 
-export enum CONTINENTS {
-    AFRICA = "África",
-    AMERICA = "América",
-    ASIA = "Ásia",
-    EUROPE = "Europa",
-    OCEANIA = "Oceania"
- }
+export enum STATUS {
+    TO_DO = "to_do",
+    DOING = "doing",
+    DONE = "done",
+}
+
+export type Task = {
+    id: number,
+    title: string,
+    description: string,
+    status: STATUS,
+    limitDate: string,
+    creatorUserId: number,
+    creatorUserNickname: string
+}
