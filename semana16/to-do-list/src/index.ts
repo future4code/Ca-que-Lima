@@ -2,20 +2,14 @@ import express, { Express, Request, Response } from 'express'
 import cors from 'cors'
 import { AddressInfo } from 'net'
 import { connection } from './connection'
+import getAllUsers from './endpoints/getAllUsers'
 
 const app: Express = express()
 
 app.use(express.json())
 app.use(cors())
 
-app.get("/user/all", async (req: Request, res: Response): Promise<any> => {
-    try {
-        const users = await connection("ToDoListUser").select("id", "nickname").orderBy("id")
-        res.status(200).send({ users: users })
-    } catch (error: any) {
-        res.send(error.sqlMessage || error.message)
-    }
-})
+app.get("/user/all", getAllUsers)
 
 app.get("/user/:id", async (req: Request, res: Response): Promise<any> => {
     let errorCode: number = 400
@@ -76,14 +70,14 @@ app.put("/user/edit/:id", async (req: Request, res: Response): Promise<any> => {
     }
 })
 
-// app.get("/task", async (req: Request, res: Response): Promise<any> => {
-//     try {
-//         const tasks = await connection("ToDoListTask")
-//         res.status(200).send(tasks)
-//     } catch (error: any) {
-//         res.send(error.sqlMessage || error.message)
-//     }
-// })
+app.get("/task/all", async (req: Request, res: Response): Promise<any> => {
+    try {
+        const tasks = await connection("ToDoListTask")
+        res.status(200).send(tasks)
+    } catch (error: any) {
+        res.send(error.sqlMessage || error.message)
+    }
+})
 
 app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
     let errorCode: number = 400
