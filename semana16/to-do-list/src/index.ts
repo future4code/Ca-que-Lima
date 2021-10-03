@@ -3,6 +3,7 @@ import cors from 'cors'
 import { AddressInfo } from 'net'
 import { connection } from './connection'
 import getAllUsers from './endpoints/getAllUsers'
+import getUserById from './endpoints/getUserById'
 
 const app: Express = express()
 
@@ -11,21 +12,7 @@ app.use(cors())
 
 app.get("/user/all", getAllUsers)
 
-app.get("/user/:id", async (req: Request, res: Response): Promise<any> => {
-    let errorCode: number = 400
-    const id: number = Number(req.params.id)
-
-    try {
-        const user = await connection("ToDoListUser").select("id", "nickname").where({ id: id })
-        if (user.length) {
-            res.status(200).send(user[0])
-        } else {
-            throw new Error('Usuário não encontrado')
-        }
-    } catch (error: any) {
-        res.status(errorCode).send(error.sqlMessage || error.message)
-    }
-})
+app.get("/user/:id", getUserById)
 
 app.post("/user", async (req: Request, res: Response): Promise<any> => {
     let errorCode: number = 400
