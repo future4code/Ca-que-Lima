@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import insertUser from '../data/insertUser'
 
-
 export default async function createUser(req: Request, res: Response): Promise<any> {
     let errorCode: number = 400
     const { name, nickname, email } = req.body

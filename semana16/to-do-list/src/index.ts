@@ -5,6 +5,7 @@ import { connection } from './connection'
 import getAllUsers from './endpoints/getAllUsers'
 import getUserById from './endpoints/getUserById'
 import createUser from './endpoints/createUser'
+import editUserById from './endpoints/editUserById'
 
 const app: Express = express()
 
@@ -17,32 +18,7 @@ app.get("/user/:id", getUserById)
 
 app.post("/user", createUser)
 
-app.put("/user/edit/:id", async (req: Request, res: Response): Promise<any> => {
-    let errorCode: number = 400
-    const id: number = Number(req.params.id)
-    const { name, nickname } = req.body
-
-    try {
-        const user = await connection("ToDoListUser").where({ id: id })
-        if (user.length) {
-            if (name === "" || nickname === "") {
-                throw new Error('Por favor cheque os campos')
-            } else {
-                if (name) {
-                    await connection("ToDoListUser").where({ id: id }).update({ name: name })
-                }
-                if (nickname) {
-                    await connection("ToDoListUser").where({ id: id }).update({ nickname: nickname })
-                }
-                res.status(200).send('Usuário atualizado com sucesso')
-            }
-        } else {
-            throw new Error('Usuário não encontrado')
-        }
-    } catch (error: any) {
-        res.status(errorCode).send(error.sqlMessage || error.message)
-    }
-})
+app.put("/user/edit/:id", editUserById)
 
 app.get("/task/all", async (req: Request, res: Response): Promise<any> => {
     try {
