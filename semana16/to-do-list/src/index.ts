@@ -4,6 +4,7 @@ import { AddressInfo } from 'net'
 import { connection } from './connection'
 import getAllUsers from './endpoints/getAllUsers'
 import getUserById from './endpoints/getUserById'
+import createUser from './endpoints/createUser'
 
 const app: Express = express()
 
@@ -14,21 +15,7 @@ app.get("/user/all", getAllUsers)
 
 app.get("/user/:id", getUserById)
 
-app.post("/user", async (req: Request, res: Response): Promise<any> => {
-    let errorCode: number = 400
-    const { name, nickname, email } = req.body
-
-    try {
-        if (!name || !nickname || !email) {
-            throw new Error('Por favor preencha todos os campos')
-        } else {
-            await connection("ToDoListUser").insert({ name: name, nickname: nickname, email: email })
-            res.status(200).send('Usuário inserido com sucesso')
-        }
-    } catch (error: any) {
-        res.status(errorCode).send(error.sqlMessage || error.message)
-    }
-})
+app.post("/user", createUser)
 
 app.put("/user/edit/:id", async (req: Request, res: Response): Promise<any> => {
     let errorCode: number = 400
