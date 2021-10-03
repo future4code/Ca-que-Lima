@@ -8,6 +8,7 @@ import createUser from './endpoints/createUser'
 import editUserById from './endpoints/editUserById'
 import getAllTasks from './endpoints/getAllTasks'
 import getTaskById from './endpoints/getTaskById'
+import getTaskByCreatorId from './endpoints/getTaskByCreatorId'
 
 const app: Express = express()
 
@@ -27,43 +28,7 @@ app.get("/task/all", getAllTasks)
 
 app.get("/task/:id", getTaskById)
 
-app.get("/task/", async (req: Request, res: Response): Promise<any> => {
-    let errorCode: number = 400
-    const id: number = Number(req.query.creatorUserId)
-    try {
-        if (!id) {
-            throw new Error('Por favor, insira o ID')
-        }
-
-        const user = await connection("ToDoListUser").where({ id: id })
-
-        if (user.length) {
-            const tasks = await connection("ToDoListTask")
-                .join("ToDoListUser", "creator_user_id", "=", "ToDoListUser.id")
-                .select(
-                    "ToDoListTask.id",
-                    "title",
-                    "description",
-                    "status",
-                    "limit_date as limitDate",
-                    "creator_user_id as creatorUserId",
-                    "nickname as creatorUserNickname"
-                )
-                .from("ToDoListTask").where({ "ToDoListUser.id": id })
-
-            const newArray = tasks.map(task => {
-                const newDate: string = task.limitDate.toISOString().slice(0, 10).split('-')
-                const formattedDate: string = newDate[2] + '/' + newDate[1] + '/' + newDate[0]
-                return { ...task, limitDate: formattedDate }
-            })
-            res.status(200).send({ tasks: newArray })
-        } else {
-            throw new Error('Usuário não encontrado')
-        }
-    } catch (error: any) {
-        res.status(errorCode).send(error.sqlMessage || error.message)
-    }
-})
+app.get("/task/", getTaskByCreatorId)
 
 app.post("/task", async (req: Request, res: Response): Promise<any> => {
     let errorCode = 400
