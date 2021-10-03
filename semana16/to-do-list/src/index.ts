@@ -7,6 +7,7 @@ import getUserById from './endpoints/getUserById'
 import createUser from './endpoints/createUser'
 import editUserById from './endpoints/editUserById'
 import getAllTasks from './endpoints/getAllTasks'
+import getTaskById from './endpoints/getTaskById'
 
 const app: Express = express()
 
@@ -24,35 +25,7 @@ app.put("/user/edit/:id", editUserById)
 // endpoint apenas para meu uso, para checar todas as tasks
 app.get("/task/all", getAllTasks)
 
-app.get("/task/:id", async (req: Request, res: Response): Promise<any> => {
-    let errorCode: number = 400
-    const id: number = Number(req.params.id)
-    try {
-        const taskIsValid = await connection("ToDoListTask").where({ id: id })
-
-        if (taskIsValid.length) {
-            const task = await connection("ToDoListTask")
-                .join("ToDoListUser", "creator_user_id", "=", "ToDoListUser.id")
-                .select(
-                    "ToDoListTask.id",
-                    "title",
-                    "description",
-                    "status",
-                    "limit_date as limitDate",
-                    "creator_user_id as creatorUserId",
-                    "nickname as creatorUserNickname"
-                )
-                .from("ToDoListTask").where({ "ToDoListTask.id": id })
-            const newDate: string = task[0].limitDate.toISOString().slice(0, 10).split('-')
-            const formattedDate: string = newDate[2] + '/' + newDate[1] + '/' + newDate[0]
-            res.status(200).send({ ...task[0], limitDate: formattedDate })
-        } else {
-            throw new Error('ID inválido')
-        }
-    } catch (error: any) {
-        res.status(errorCode).send(error.sqlMessage || error.message)
-    }
-})
+app.get("/task/:id", getTaskById)
 
 app.get("/task/", async (req: Request, res: Response): Promise<any> => {
     let errorCode: number = 400
