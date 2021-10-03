@@ -1,4 +1,4 @@
-import express, { Express } from 'express'
+import express, { Request, Response, Express } from 'express'
 import cors from 'cors'
 import { AddressInfo } from 'net'
 import getAllUsers from './endpoints/getAllUsers'
@@ -9,6 +9,7 @@ import getAllTasks from './endpoints/getAllTasks'
 import getTaskById from './endpoints/getTaskById'
 import getTaskByCreatorId from './endpoints/getTaskByCreatorId'
 import createTask from './endpoints/createTask'
+import getUsersByQuery from './endpoints/getUsersByQuery'
 
 const app: Express = express()
 
@@ -18,6 +19,8 @@ app.use(cors())
 app.get("/user/all", getAllUsers)
 
 app.get("/user/:id", getUserById)
+
+app.get("/user/", getUsersByQuery)
 
 app.post("/user", createUser)
 
