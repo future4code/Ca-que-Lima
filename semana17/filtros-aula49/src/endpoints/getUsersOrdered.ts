@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import selectUsersOrdered from "../data/selectUsersOrdered"
 
-
 export default async function getUsersOrdered(req: Request, res: Response): Promise<void> {
     let sort: string = (req.query.sort as string)?.toLowerCase()
     let order: string = (req.query.order as string)?.toLowerCase()

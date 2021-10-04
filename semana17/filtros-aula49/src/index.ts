@@ -5,6 +5,7 @@ import getAllUsers from "./endpoints/getAllUsers"
 import getUsersByName from "./endpoints/getUsersByName"
 import getUsersByType from "./endpoints/getUsersByType"
 import getUsersOrdered from "./endpoints/getUsersOrdered"
+import getUsersPages from "./endpoints/getUsersPages"
 
 export const app = express()
 
@@ -18,7 +19,10 @@ app.use(cors())
 // app.get("/users/:type", getUsersByType)
 
 // Exercício 2
-app.get("/users", getUsersOrdered)
+// app.get("/users", getUsersOrdered)
+
+// Exercício 3
+app.get("/users/:page", getUsersPages)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {

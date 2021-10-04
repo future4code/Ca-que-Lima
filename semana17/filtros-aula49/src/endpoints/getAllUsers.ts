@@ -13,7 +13,6 @@ export default async function getAllUsers(req: Request,res: Response): Promise<v
       res.status(200).send(users)
       
    } catch (error: any) {
-      console.log(error)
       res.send(error.sqlMessage || error.message)
    }
 }
