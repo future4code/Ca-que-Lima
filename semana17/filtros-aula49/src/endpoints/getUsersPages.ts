@@ -7,7 +7,7 @@ export default async function getUsersPages(req: Request, res: Response): Promis
 
     try {
 
-        if (page < 1) {
+        if (page < 1 || isNaN(page)) {
             page = 1
         }
 

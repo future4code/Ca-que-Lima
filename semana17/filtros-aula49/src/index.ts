@@ -14,15 +14,18 @@ app.use(cors())
 
 
 // Exercício 1
-// app.get("/users/all", getAllUsers)
-// app.get("/users", getUsersByName)
-// app.get("/users/:type", getUsersByType)
+app.get("/users/all", getAllUsers)
+app.get("/users", getUsersByName)
+app.get("/users/:type", getUsersByType)
 
 // Exercício 2
-// app.get("/users", getUsersOrdered)
+app.get("/users", getUsersOrdered)
 
 // Exercício 3
 app.get("/users/:page", getUsersPages)
+
+// Exercício 4
+// Buguei
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {
