@@ -14,6 +14,6 @@ export default async function getAllUsers(req: Request,res: Response): Promise<v
       
    } catch (error: any) {
       console.log(error)
-      res.send(error.message || error.sqlMessage)
+      res.send(error.sqlMessage || error.message)
    }
 }

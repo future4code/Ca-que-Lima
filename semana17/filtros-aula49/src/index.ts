@@ -4,15 +4,21 @@ import { AddressInfo } from "net"
 import getAllUsers from "./endpoints/getAllUsers"
 import getUsersByName from "./endpoints/getUsersByName"
 import getUsersByType from "./endpoints/getUsersByType"
+import getUsersOrdered from "./endpoints/getUsersOrdered"
 
 export const app = express()
 
 app.use(express.json())
 app.use(cors())
 
-app.get("/users/all", getAllUsers)
-app.get("/users", getUsersByName)
-app.get("/users/:type", getUsersByType)
+
+// Exercício 1
+// app.get("/users/all", getAllUsers)
+// app.get("/users", getUsersByName)
+// app.get("/users/:type", getUsersByType)
+
+// Exercício 2
+app.get("/users", getUsersOrdered)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {

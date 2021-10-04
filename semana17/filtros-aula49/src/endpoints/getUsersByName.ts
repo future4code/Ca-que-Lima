@@ -22,6 +22,6 @@ export default async function getUsersByName(req: Request, res: Response): Promi
         res.status(200).send(users)
 
     } catch (error: any) {
-        res.send(error.message || error.sqlMessage)
+        res.send(error.sqlMessage || error.message)
     }
 }
