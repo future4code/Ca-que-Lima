@@ -1,6 +1,7 @@
 import { ProductDatabase } from "../data/ProductDatabase"
 import { Request, Response } from "express"
 import { Product } from "../entities/Product"
+import { productDB } from "../types"
 
 export default async function getAllProducts(req: Request, res: Response): Promise<void> {
     let errorCode: number = 400
@@ -8,7 +9,16 @@ export default async function getAllProducts(req: Request, res: Response): Promi
     try {
 
         const productDatabase = new ProductDatabase()
-        const allProducts: Product[] = await productDatabase.getAll()
+        const productsDB: productDB[] = await productDatabase.getAll()
+
+        const allProducts = productsDB.map(product => {
+            return new Product(
+                product.id,
+                product.name,
+                product.description,
+                product.price
+            )
+        })
 
         res.status(200).send({ products: allProducts })
 

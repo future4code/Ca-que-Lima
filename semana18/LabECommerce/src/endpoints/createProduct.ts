@@ -10,7 +10,7 @@ export default async function createProduct(req: Request, res: Response): Promis
         const { name, description, price } = req.body
 
         if (!name || !description || !price) {
-            throw new Error('Por favor preencha todos os campos')
+            throw new Error('Por favor preencha e cheque todos os campos')
         }
 
         const id = v4()
@@ -22,8 +22,8 @@ export default async function createProduct(req: Request, res: Response): Promis
             price
         )
 
-        const userDatabase = new ProductDatabase()
-        await userDatabase.create(product)
+        const productDatabase = new ProductDatabase()
+        await productDatabase.create(product)
 
         res.status(200).send('Produto criado com sucesso')
 
