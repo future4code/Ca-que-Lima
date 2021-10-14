@@ -9,7 +9,7 @@ export class ProductDatabase extends BaseDatabase {
     }
 
     public async getAll() {
-        return BaseDatabase.connection(productsTable)
+        return BaseDatabase.connection(productsTable).select('id', 'name', 'description', 'price')
     }
 
     public async deleteById(id: string) {
