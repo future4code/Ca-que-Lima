@@ -11,6 +11,10 @@ export class ProductDatabase extends BaseDatabase {
     public async getAll() {
         return BaseDatabase.connection(productsTable)
     }
+    
+    public async getById(id: string) {
+        return BaseDatabase.connection(productsTable).where({ id })
+    }
 
     public async deleteById(id: string) {
         await BaseDatabase.connection(productsTable).delete().where({ id })

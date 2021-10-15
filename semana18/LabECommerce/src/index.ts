@@ -1,5 +1,6 @@
 import app  from "./app"
 import createProduct from "./endpoints/createProduct"
+import createPurchase from "./endpoints/createPurchase"
 import createTicket from "./endpoints/createTicket"
 import createUser from "./endpoints/createUser"
 import getAllProducts from "./endpoints/getAllProducts"
@@ -12,3 +13,4 @@ app.get('/tickets', getAllTickets)
 app.post('/users', createUser)
 app.post('/products', createProduct)
 app.post('/tickets', createTicket)
+app.post ('/purchases', createPurchase)
