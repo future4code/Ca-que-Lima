@@ -4,6 +4,7 @@ import { CustomError } from "../errors/CustomError"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 import { Authenticator } from "../services/Authenticator"
+import { user } from "../types"
 
 export class UserBusiness {
 
@@ -56,6 +57,18 @@ export class UserBusiness {
         const token: string = new Authenticator().generateToken({ id: user.id, role: user.role })
 
         return token
+    }
+
+    public getAll = async (token: string): Promise<user[]> => {
+
+        const tokenData = new Authenticator().getTokenData(token)
+        const allUsers: user[] = await new UserDatabase().getAll()
+
+        if (tokenData === null) {
+            throw new CustomError('Token inválido', 400)
+        }
+
+        return allUsers
     }
 
 }
