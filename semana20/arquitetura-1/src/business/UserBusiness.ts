@@ -8,7 +8,7 @@ import { user } from "../types"
 
 export class UserBusiness {
 
-    public signUp = async (input: any) => {
+    public signUp = async (input: any): Promise<string> => {
         const { name, email, password, role } = input
 
         if (!name || !email || !password || !role) {
@@ -69,6 +69,19 @@ export class UserBusiness {
         }
 
         return allUsers
+    }
+
+    public deleteById = async (id: string, token: string): Promise<void> => {
+
+        const tokenData = new Authenticator().getTokenData(token)
+
+        console.log(tokenData)
+
+        if (tokenData?.role === "ADMIN") {
+            await new UserDatabase().deleteById(id)
+        } else {
+            throw new CustomError("Usuário deve ser 'ADMIN' para essa operação", 401)
+        }
     }
 
 }
