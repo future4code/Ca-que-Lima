@@ -1,12 +1,26 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../business/UserBusiness"
+import { LoginInputDTO, UserInputDTO } from "../model/User"
+import { UserDatabase } from "../data/UserDatabase"
 
 export class UserController {
-    public static signUp = async (req: Request, res: Response): Promise<void> => {
+
+    private userBusiness: UserBusiness
+
+    constructor() {
+        this.userBusiness = new UserBusiness(new UserDatabase())
+    }
+
+    public signUp = async (req: Request, res: Response): Promise<void> => {
         try {
 
-            const input = req.body
-            const token = await new UserBusiness().signUp(input)
+            const input: UserInputDTO =  {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password
+            }
+
+            const token = await this.userBusiness.signUp(input)
 
             res.status(200).send({ message: "Usuário criado!", token })
 
@@ -15,11 +29,15 @@ export class UserController {
         }
     }
 
-    public static logIn = async (req: Request, res: Response): Promise<void> => {
+    public logIn = async (req: Request, res: Response): Promise<void> => {
         try {
 
-            const input = req.body
-            const token = await new UserBusiness().logIn(input)
+            const input: LoginInputDTO = {
+                email: req.body.email,
+                password: req.body.password
+            }
+
+            const token = await this.userBusiness.logIn(input)
 
             res.status(200).send({ token })
 
@@ -28,11 +46,11 @@ export class UserController {
         }
     }
 
-    public static getAll = async (req: Request, res: Response): Promise<void> => {
+    public getAll = async (req: Request, res: Response): Promise<void> => {
         try {
 
             const token = req.headers.authorization as string
-            const users = await new UserBusiness().getAll(token)
+            const users = await this.userBusiness.getAll(token)
 
             res.status(200).send({ users })
 
@@ -40,19 +58,4 @@ export class UserController {
             res.status(error.statusCode).send({ message: error.sqlMessage || error.message })
         }
     }
-
-    public static deleteById = async (req: Request, res: Response): Promise<void> => {
-        try {
-
-            const id: string = req.params.id
-            const token = req.headers.authorization as string
-            await new UserBusiness().deleteById(id, token)
-
-            res.status(200).send('Usuário apagado com sucesso')
-
-        } catch (error: any) {
-            res.status(error.statusCode).send({ message: error.sqlMessage || error.message })
-        }
-    }
-
 }

@@ -4,7 +4,6 @@ export class User {
         private name: string,
         private email: string,
         private password: string,
-        private role: string
     ) { }
 
     public getId(): string {
@@ -19,7 +18,18 @@ export class User {
         return this.email
     }
 
-    public getAge(): string {
-        return this.role
+    public getPassword(): string {
+        return this.password
     }
+}
+
+export interface UserInputDTO {
+    name: string
+    email: string
+    password: string
+}
+
+export interface LoginInputDTO {
+    email: string,
+    password: string
 }

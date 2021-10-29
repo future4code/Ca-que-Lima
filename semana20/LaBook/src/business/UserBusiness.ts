@@ -1,17 +1,23 @@
-import { UserDatabase } from "../data/UserDatabase"
-import { User } from "../model/User"
+import { LoginInputDTO, User, UserInputDTO } from "../model/User"
 import { CustomError } from "../errors/CustomError"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 import { Authenticator } from "../services/Authenticator"
+import { UserRepository } from "./UserRepository"
 import { user } from "../types"
 
 export class UserBusiness {
 
-    public signUp = async (input: any): Promise<string> => {
-        const { name, email, password, role } = input
+    private userDatabase: UserRepository
 
-        if (!name || !email || !password || !role) {
+    constructor(userDatabaseImp: UserRepository) {
+        this.userDatabase = userDatabaseImp
+    }
+
+    public signUp = async (input: UserInputDTO): Promise<string> => {
+        const { name, email, password } = input
+
+        if (!name || !email || !password) {
             throw new CustomError('Por favor preencha todos os campos', 400)
         }
 
@@ -23,26 +29,24 @@ export class UserBusiness {
             id,
             name,
             email,
-            cypherPassword,
-            role
+            cypherPassword
         )
 
-        const userDatabase = new UserDatabase()
-        await userDatabase.create(user)
+        await this.userDatabase.create(user)
 
-        const token: string = new Authenticator().generateToken({ id, role })
+        const token: string = new Authenticator().generateToken({ id })
 
         return token
     }
 
-    public logIn = async (input: any): Promise<string> => {
+    public logIn = async (input: LoginInputDTO): Promise<string> => {
         const { email, password } = input
 
         if (!email || !password) {
             throw new CustomError("'Email' e 'senha' obrigatórios", 400)
         }
 
-        const [user] = await new UserDatabase().getByEmail(email)
+        const [user] = await this.userDatabase.getByEmail(email)
 
         if (!user) {
             throw new CustomError('Usuário não encontrado ou senha incorreta', 403)
@@ -54,7 +58,7 @@ export class UserBusiness {
             throw new CustomError('Usuário não encontrado ou senha incorreta', 403)
         }
 
-        const token: string = new Authenticator().generateToken({ id: user.id, role: user.role })
+        const token: string = new Authenticator().generateToken({ id: user.id })
 
         return token
     }
@@ -62,26 +66,13 @@ export class UserBusiness {
     public getAll = async (token: string): Promise<user[]> => {
 
         const tokenData = new Authenticator().getTokenData(token)
-        const allUsers: user[] = await new UserDatabase().getAll()
+        const allUsers: user[] = await this.userDatabase.getAll()
 
         if (tokenData === null) {
             throw new CustomError('Token inválido', 400)
         }
 
         return allUsers
-    }
-
-    public deleteById = async (id: string, token: string): Promise<void> => {
-
-        const tokenData = new Authenticator().getTokenData(token)
-
-        console.log(tokenData)
-
-        if (tokenData?.role === "ADMIN") {
-            await new UserDatabase().deleteById(id)
-        } else {
-            throw new CustomError("Usuário deve ser 'ADMIN' para essa operação", 401)
-        }
     }
 
 }

@@ -1,7 +1,11 @@
 import app  from "./app"
 import { UserController } from '../src/controllers/UserController'
+import { PostController } from "./controllers/PostController"
 
-app.post('/signup', UserController.signUp)
-app.post('/login', UserController.logIn)
-app.get('/all', UserController.getAll)
-app.delete('/:id', UserController.deleteById)
+const userController = new UserController()
+const postController = new PostController()
+
+app.post('/signup', userController.signUp)
+app.post('/login', userController.logIn)
+app.get('/all', userController.getAll)
+app.post('/post', postController.create)
