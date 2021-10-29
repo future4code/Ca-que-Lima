@@ -1,8 +1,8 @@
 import { User } from "../model/User"
-import { user } from "../types"
+import { UserData } from "../model/User"
 
 export interface UserRepository {
     create(user: User): Promise<void>
-    getAll(): Promise<user[]>
-    getByEmail(email: string): Promise<user[]>
+    getAll(): Promise<UserData[]>
+    getByEmail(email: string): Promise<UserData[]>
 }

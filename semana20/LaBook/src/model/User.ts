@@ -1,3 +1,5 @@
+import { authenticationData } from "../types"
+
 export class User {
     constructor(
         private id: string,
@@ -33,3 +35,9 @@ export interface LoginInputDTO {
     email: string,
     password: string
 }
+
+export interface UserData extends authenticationData {
+    name: string
+    email: string
+    password: string
+  }

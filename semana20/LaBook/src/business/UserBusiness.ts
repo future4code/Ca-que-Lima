@@ -4,7 +4,7 @@ import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 import { Authenticator } from "../services/Authenticator"
 import { UserRepository } from "./UserRepository"
-import { user } from "../types"
+import { UserData } from "../model/User"
 
 export class UserBusiness {
 
@@ -63,10 +63,10 @@ export class UserBusiness {
         return token
     }
 
-    public getAll = async (token: string): Promise<user[]> => {
+    public getAll = async (token: string): Promise<UserData[]> => {
 
         const tokenData = new Authenticator().getTokenData(token)
-        const allUsers: user[] = await this.userDatabase.getAll()
+        const allUsers: UserData[] = await this.userDatabase.getAll()
 
         if (tokenData === null) {
             throw new CustomError('Token inválido', 400)
