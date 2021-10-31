@@ -1,4 +1,4 @@
-import { Post, PostInputDTO } from "../model/Post"
+import { Post, PostInputDTO, PostOutputDTO } from "../model/Post"
 import { CustomError } from "../errors/CustomError"
 import { IdGenerator } from "../services/IdGenerator"
 import { Authenticator } from "../services/Authenticator"
@@ -45,6 +45,12 @@ export class PostBusiness {
         )
 
         await this.postDatabase.create(post)
+    }
+
+
+    public getPostById = async (id: string): Promise<PostOutputDTO> => {
+        const post = await this.postDatabase.getPostById(id)
+        return post[0]
     }
 
 }

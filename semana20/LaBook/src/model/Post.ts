@@ -38,3 +38,12 @@ export interface PostInputDTO {
     description: string,
     type: string
 }
+
+export interface PostOutputDTO {
+    id: string,
+    picture: string,
+    description: string,
+    creationDate: string,
+    type: string,
+    userId: string
+}

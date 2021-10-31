@@ -18,9 +18,13 @@ export class Authenticator {
 
    public getTokenData = (token: string): authenticationData | null => {
 
-      const tokenData = jwt.verify(token, process.env.JWT_KEY as string) as jwt.JwtPayload
+      try {
 
-      return tokenData as authenticationData
+         const tokenData = jwt.verify(token, process.env.JWT_KEY as string) as jwt.JwtPayload
+         return tokenData as authenticationData
 
+      } catch(error) {
+         return null
+      }
    }
 }
