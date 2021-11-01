@@ -50,7 +50,25 @@ export class PostBusiness {
 
     public getPostById = async (id: string): Promise<PostOutputDTO> => {
         const post = await this.postDatabase.getPostById(id)
-        return post[0]
+
+        if (!post.length) {
+            throw new CustomError('Post não encontrado', 404)
+        }
+
+        const newDate = post[0].creation_date.toISOString().slice(0, 10).split('-')
+
+        const formattedDate: string = newDate[2] + '/' + newDate[1] + '/' + newDate[0]
+
+        const postToReturn: PostOutputDTO = {
+            id: post[0].id,
+            picture: post[0].picture,
+            description: post[0].description, 
+            creationDate: formattedDate,
+            type: post[0].type,
+            userId: post[0].user_id
+        }
+
+        return postToReturn
     }
 
 }

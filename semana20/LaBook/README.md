@@ -1,100 +1,96 @@
-# To Do List
+# LaBook
 
 ## ESTRUTURA DE DADOS  
   
 * ## Usuários
   * id
   * name
-  * nickname 
   * email
+  * password 
 
-* ## Tarefas 
+* ## Posts 
   * id
-  * title
-  * description
-  * deadline
-  * status: `"to_do" || "doing" || "done"`
-  * author 
-  * assignees
+  * picture
+  * creationDate
+  * type: `"normal" || "evento"`
+  * userId
    
 ---
 
 ## CRIAÇÃO DE TABELAS - MySql
 
 ```sql
-CREATE TABLE to_do_list_users (
-    id VARCHAR(64) PRIMARY KEY,
-    name VARCHAR(64) NOT NULL,
-    nickname VARCHAR(64) NOT NULL,
-    email VARCHAR(64) NOT NULL
+CREATE TABLE labook_users(
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
 );
 ```
 ```sql
-CREATE TABLE to_do_list_tasks (
-    id VARCHAR(64) PRIMARY KEY,
-    title VARCHAR(64) NOT NULL,
-    description VARCHAR(1024) DEFAULT "No description provided",
-    deadline DATE,
-    status ENUM("TO_DO", "DOING", "DONE") DEFAULT "TO_DO",
-    author_id VARCHAR(64),
-    FOREIGN KEY (author_id) REFERENCES to_do_list_users(id)
-);
-```
-```sql
-CREATE TABLE to_do_list_assignees (
-    task_id VARCHAR(64),
-    assignee_id VARCHAR(64),
-    PRIMARY KEY (task_id, assignee_id),
-    FOREIGN KEY (task_id) REFERENCES to_do_list_tasks(id),
-    FOREIGN KEY (assignee_id) REFERENCES to_do_list_users(id)
+CREATE TABLE labook_posts(
+  id VARCHAR(50) NOT NULL PRIMARY KEY,
+  picture VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  creation_date DATE NOT NULL,
+  type ENUM("normal", "evento"),
+  user_id VARCHAR(50) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES labook_users(id)
 );
 ```
 ---
 
 ## ENDPOINTS 
 
-* ## Criar usuário
-  * Método: PUT
-  * Path: `/user`
+* ## Cadastrar usuário
+  * Método: POST
+  * Path: `/signup`
   * Body:
     * name (obrigatório)
-    * nickname (obrigatório)
     * email (obrigatório)
+    * password (obrigatório)
+  * Body de resposta:
+    * message
+    * token
 
-* ## Pegar usuário pelo id
+* ## Login Usuário
+  * Método: POST
+  * Path: `/login`
+  * Body:
+    * email (obrigatório)
+    * password (obrigatório)
+  * Body de resposta:
+    * token
+
+* ## Criar Post
+  * Método: POST
+  * Path: `/post`
+  * headers:
+    * authorization: token
+  * Body:
+    * picture (obrigatório)
+    * creationDate (obrigatório)
+    * type: `"normal" || "evento"` (obrigatório)
+
+
+* ## Pegar post pelo id
   * Método: GET
-  * Path: `/user/:id`
+  * Path: `/post/:id`
   * Body de Resposta: (retornar um erro se não encontrar)
     * id
-    * nickname
-
-
-* ## Editar usuário**
-  * Método: POST
-  * Path: `/user/edit/:id`
-  * Body:
-    * name (opcional; não pode ser vazio)
-    * nickname (opcional; não pode ser vazio)
-    * email (opcional; não pode ser vazio)
-
-
-* ## Criar tarefa
-  * Método: PUT
-  * Path: `/task`
-  * Body:
-    * title (obrigatório)
-    * description (obrigatório)
-    * deadline (obrigatório; formato `YYYY-MM-DD`)
-    * authorId
+    * picture
+    * description
+    * creationDate
+    * type
+    * userId
 
 * ## Pegar tarefa pelo id
   * Método: GET
   * Path: `/task/:id`
   * Body de Resposta: (retornar um erro se não encontrar)
     * id
-    * title 
+    * picture 
     * description
-    * deadline (formato `YYYY-MM-DD`)
-    * status
-    * authorId
-    * authorNickname
+    * creationDate (formato `DD-MM-YYYY`)
+    * type
+    * userId
