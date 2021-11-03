@@ -1,5 +1,5 @@
 import { BaseDatabase } from "./BaseDatabase"
-import { User } from "../model/User"
+import { User } from "../model/Pokemon"
 import { UserRepository } from "../business/UserRepository"
 
 const userTable: string = "labook_users"

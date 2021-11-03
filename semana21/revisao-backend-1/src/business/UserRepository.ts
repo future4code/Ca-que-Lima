@@ -1,5 +1,5 @@
-import { User } from "../model/User"
-import { UserData } from "../model/User"
+import { User } from "../model/Pokemon"
+import { UserData } from "../model/Pokemon"
 
 export interface UserRepository {
     create(user: User): Promise<void>

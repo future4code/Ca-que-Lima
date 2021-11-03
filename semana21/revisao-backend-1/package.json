@@ -6,7 +6,8 @@
     "scripts": {
         "start": "tsc && node --inspect ./build/index.js",
         "dev": "ts-node-dev ./src/index.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "migrations": "tsnd ./src/data/migrations.ts",
+        "test": "tsnd ./src/services/dataConverter.ts"
     },
     "keywords": [],
     "author": "",
@@ -19,7 +20,8 @@
         "jsonwebtoken": "^8.5.1",
         "knex": "^0.21.5",
         "mysql": "^2.18.1",
-        "uuid": "^8.3.1"
+        "uuid": "^8.3.1",
+        "xlsx": "^0.17.3"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",
