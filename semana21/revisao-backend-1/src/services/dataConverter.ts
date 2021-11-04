@@ -10,5 +10,3 @@ const workbook: XLSX.WorkBook = XLSX.readFile("pokemon_go.xlsx")
 // const worksheet = workbook.Sheets[Sheet1]
 
 export const json_data = XLSX.utils.sheet_to_json(workbook.Sheets["Sheet1"])
-
-// export worksheets.Sheet1
