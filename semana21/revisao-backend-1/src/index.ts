@@ -1,8 +1,4 @@
 import app  from "./app"
-import { UserController } from '../src/controllers/UserController'
+import { pokemonRouter } from "./controllers/routers/PokemonRouter"
 
-// const userController = new UserController()
-
-// app.post('/signup', userController.signUp)
-// app.post('/login', userController.logIn)
-// app.get('/all', userController.getAll)
+app.use('/pokemon', pokemonRouter)
