@@ -1,96 +1,83 @@
 # LaBook
 
+## Install
+
+```sh
+npm install
+```
+
+## Run Migrations
+
+```sh
+npm run migrations
+```
+
+## Run Build
+
+```sh
+npm run build
+```
+
+## Run Dev
+
+```sh
+npm run dev
+```
+
 ## ESTRUTURA DE DADOS  
   
-* ## Usuários
+* ## Pokemon
   * id
   * name
-  * email
-  * password 
-
-* ## Posts 
-  * id
-  * picture
-  * creationDate
-  * type: `"normal" || "evento"`
-  * userId
-   
+  * pokedex_number
+  * img_name
+  * generation
+  * evolution_stage
+  * evolved
+  * family_id
+  * cross_gen
+  * type_1
+  * type_2
+  * weather_1
+  * weather_2
+  * stat_total
+  * atk
+  * def
+  * sta
+  * legendary
+  * acquirable
+  * spawns
+  * regional
+  * ridable
+  * hatchable
+  * shiny
+  * nest
+  * is_new
+  * not_gettable
+  * future_evolve
+  * cp_40
+  * cp39
+ 
 ---
 
-## CRIAÇÃO DE TABELAS - MySql
-
-```sql
-CREATE TABLE labook_users(
-  id VARCHAR(50) NOT NULL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL
-);
-```
-```sql
-CREATE TABLE labook_posts(
-  id VARCHAR(50) NOT NULL PRIMARY KEY,
-  picture VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  creation_date DATE NOT NULL,
-  type ENUM("normal", "evento"),
-  user_id VARCHAR(50) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES labook_users(id)
-);
-```
----
 
 ## ENDPOINTS 
 
-* ## Cadastrar usuário
-  * Método: POST
-  * Path: `/signup`
-  * Body:
-    * name (obrigatório)
-    * email (obrigatório)
-    * password (obrigatório)
-  * Body de resposta:
-    * message
-    * token
-
-* ## Login Usuário
-  * Método: POST
-  * Path: `/login`
-  * Body:
-    * email (obrigatório)
-    * password (obrigatório)
-  * Body de resposta:
-    * token
-
-* ## Criar Post
-  * Método: POST
-  * Path: `/post`
-  * headers:
-    * authorization: token
-  * Body:
-    * picture (obrigatório)
-    * creationDate (obrigatório)
-    * type: `"normal" || "evento"` (obrigatório)
-
-
-* ## Pegar post pelo id
+* ## Pegar todos os Pokemon
   * Método: GET
-  * Path: `/post/:id`
-  * Body de Resposta: (retornar um erro se não encontrar)
-    * id
-    * picture
-    * description
-    * creationDate
-    * type
-    * userId
+  * Path: `/pokemon`
+  * Body de Resposta:
+    * Um array de Pokemon
 
-* ## Pegar tarefa pelo id
+* ## Pegar Pokemon pelo id
   * Método: GET
-  * Path: `/task/:id`
+  * Path: `/pokemon/:id`
   * Body de Resposta: (retornar um erro se não encontrar)
-    * id
-    * picture 
-    * description
-    * creationDate (formato `DD-MM-YYYY`)
-    * type
-    * userId
+    * Um Pokemon
+
+* ## Pegar Pokemon filtrando
+  * Método: GET
+  * Path: `/pokemon/?name={nome}&type={tipo 1 ou tipo 2}`
+  * Apenas aceita nomes e tipos
+  * Body de Resposta: (retornar um erro se não encontrar)
+    * Um array de Pokemon
