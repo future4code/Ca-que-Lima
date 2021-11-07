@@ -10,15 +10,6 @@ export class PokemonController {
         this.pokemonBusiness = new PokemonBusiness(new PokemonDatabase())
     }
 
-    public getAll = async (req: Request, res: Response): Promise<void> => {
-        try {
-            const allPokemon = await this.pokemonBusiness.getAll()
-            res.status(200).send(allPokemon)
-        } catch (error: any) {
-            res.status(error.statusCode).send(error.sqlMessage || error.message)
-        }
-    }
-
     public getById = async (req: Request, res: Response): Promise<void> => {
         try {
 
@@ -33,11 +24,19 @@ export class PokemonController {
         }
     }
 
-    public getByName = async (req: Request, res: Response): Promise<void> => {
+    public filterPokemon = async (req: Request, res: Response): Promise<void> => {
+        try {
+            
+            const name = (req.query.name as string || "")
+            const type = (req.query.type as string || "")
+
+            const result = await this.pokemonBusiness.filterPokemon(name, type)
+
+            res.status(200).send(result)
+
+        } catch (error: any) {
+            res.status(error.statusCode).send(error.sqlMessage || error.message)
+        }
         
-    }
-
-    public getByType = async (req: Request, res: Response): Promise<void> => {
-
     }
 }

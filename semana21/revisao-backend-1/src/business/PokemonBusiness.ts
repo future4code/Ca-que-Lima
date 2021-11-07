@@ -10,12 +10,6 @@ export class PokemonBusiness {
         this.pokemonDatabase = pokemonDatabaseImp
     }
 
-    public getAll = async (): Promise<Pokemon[]> => {
-
-        const allPokemon = await this.pokemonDatabase.getAll()
-        return allPokemon
-    }
-
     public getById = async (id: number): Promise<Pokemon[]> => {
 
         const pokemon = await this.pokemonDatabase.getById(id)
@@ -25,6 +19,17 @@ export class PokemonBusiness {
         }
 
         return pokemon
+    }
+
+    public filterPokemon = async (name: string, type: string): Promise<Pokemon[]> => {
+
+        const result = await this.pokemonDatabase.filterPokemon(name, type)
+
+        if (!result.length) {
+            throw new CustomError('Nenhum pokemon encontrado', 404)
+        }
+
+        return result
     }
 
 }
