@@ -1,0 +1,18 @@
+{
+  "name": "aula68-alg1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "exercise1": "clear && tsnd src/exercicio1",
+    "exercise2": "clear && tsnd src/exercicio2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.11.9",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.2"
+  }
+}
