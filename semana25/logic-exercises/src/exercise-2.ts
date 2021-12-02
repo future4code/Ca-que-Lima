@@ -14,7 +14,7 @@ interface HashTable {
 }
 
 function soleNumber2(nums: number[]): number {
-    const hash: HashTable = {}
+    const hash: HashTable = {}  
     
     for (let num of nums) {
         const key = num
@@ -25,6 +25,8 @@ function soleNumber2(nums: number[]): number {
             hash[key] = true
         }
     }
+
+    console.log(hash)
     
     return Number(Object.keys(hash)[0])
 }

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "exercise-2": "clear && tsnd src/exercise-2"
+    "exercise-2": "clear && tsnd src/exercise-2",
+    "exercise-3": "clear && tsnd src/exercise-3",
+    "exercise-4": "clear && tsnd src/exercise-4"
   },
   "keywords": [],
   "author": "",
